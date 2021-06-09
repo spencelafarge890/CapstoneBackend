@@ -31,10 +31,21 @@ public class AccountHolderServiceImpl {
 		 return checkAccRepo.findAll();
 	}
 	
+	public void addPersonalCheckingAccount(CheckingAccount checkAccount, AccountHolder accHolder) {
+		accHolder.setCombinedBalance(accHolder.getCombinedBalance() + checkAccount.getBalance());
+		checkAccount.setAccountHolder(accHolder);
+		checkAccRepo.save(checkAccount);
+	}
+	
 	public void addCheckingAccount(CheckingAccount checkAccount, AccountHolder accHolder) {
 		accHolder.setCombinedBalance(accHolder.getCombinedBalance() + checkAccount.getBalance());
 		checkAccount.setAccountHolder(accHolder);
 		checkAccRepo.save(checkAccount);
+	}
+	
+	public void deleteCheckingAccount(CheckingAccount checkAccount, AccountHolder accHolder) {
+		accHolder.setCombinedBalance(accHolder.getCombinedBalance() - checkAccount.getBalance());
+		checkAccRepo.delete(checkAccount);
 	}
 	
 	public CheckingAccount getCheckingAccountById(int Id) throws NoSuchResourceFoundException {
@@ -57,6 +68,11 @@ public class AccountHolderServiceImpl {
 		accHolder.setCombinedBalance(accHolder.getCombinedBalance() + savingsAccount.getBalance());
 		savingsAccount.setAccountHolder(accHolder);
 		savingAccRepo.save(savingsAccount);
+	}
+	
+	public void deleteSavingsAccount(SavingsAccount savingsAccount, AccountHolder accHolder) {
+		accHolder.setCombinedBalance(accHolder.getCombinedBalance() - savingsAccount.getBalance());
+		savingAccRepo.delete(savingsAccount);
 	}
 	
 	public SavingsAccount getSavingsAccountById(int Id) throws NoSuchResourceFoundException {

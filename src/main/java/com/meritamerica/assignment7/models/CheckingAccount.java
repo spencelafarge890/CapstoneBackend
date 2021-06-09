@@ -13,13 +13,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.meritamerica.assignment7.services.MeritBankService;
 
 
-@Entity
+@MappedSuperclass
 public class CheckingAccount extends BankAccount {
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

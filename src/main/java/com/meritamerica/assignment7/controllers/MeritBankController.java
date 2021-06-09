@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -122,6 +123,16 @@ public class MeritBankController {
 		accountHolderSvc.addCheckingAccount(checkingAccount, accHolder);
 		return checkingAccount;
 	}
+	
+	@PutMapping("/account-holders/{id}/checking-accounts")
+	@ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
+	@Secured("ROLE_ADMIN")
+	public void deleteCheckingAccount(
+			@PathVariable int id, @RequestBody @Valid CheckingAccount checkingAccount) 
+					throws NoSuchResourceFoundException, ExceedsCombinedBalanceLimitException {
+		AccountHolder accHolder = meritBankSvc.getAccountHolderById(id);
+		accountHolderSvc.deleteCheckingAccount(checkingAccount, accHolder);
+	}
 
 	@GetMapping("/account-holders/{id}/checking-accounts")
 	@ResponseStatus(HttpStatus.OK)
@@ -141,6 +152,17 @@ public class MeritBankController {
 		AccountHolder accHolder = meritBankSvc.getAccountHolderById(id);
 		savingsAccount.setAccountHolder(accHolder);
 		accountHolderSvc.addSavingsAccount(savingsAccount, accHolder);
+		return savingsAccount;
+	}
+	
+	@PutMapping("/account-holders/{id}/savings-accounts")
+	@ResponseStatus(HttpStatus.CREATED)
+	@Secured("ROLE_ADMIN")
+	public SavingsAccount deleteSavingsAccount(
+			@PathVariable int id, @RequestBody @Valid SavingsAccount savingsAccount ) 
+					throws NoSuchResourceFoundException, NegativeAmountException, ExceedsCombinedBalanceLimitException {
+		AccountHolder accHolder = meritBankSvc.getAccountHolderById(id);
+		accountHolderSvc.deleteSavingsAccount(savingsAccount, accHolder);
 		return savingsAccount;
 	}
 	

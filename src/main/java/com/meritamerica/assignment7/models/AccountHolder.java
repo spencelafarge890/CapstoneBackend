@@ -69,7 +69,6 @@ public class AccountHolder implements Comparable<AccountHolder>{
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private MeritBankUser mbUser;
 	
-	
 	public MeritBankUser getMbUser() {
 		return mbUser;
 	}
