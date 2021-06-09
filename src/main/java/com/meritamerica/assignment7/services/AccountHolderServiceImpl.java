@@ -41,7 +41,17 @@ public class AccountHolderServiceImpl {
 		personalCheckAccRepo.save(checkAccount);
 	}
 	
+<<<<<<< HEAD
 	public void addDBACheckingAccount(DBACheckingAccount checkAccount, AccountHolder accHolder) {
+=======
+	public void addPersonalCheckingAccount(CheckingAccount checkAccount, AccountHolder accHolder) {
+		accHolder.setCombinedBalance(accHolder.getCombinedBalance() + checkAccount.getBalance());
+		checkAccount.setAccountHolder(accHolder);
+		checkAccRepo.save(checkAccount);
+	}
+	
+	public void addCheckingAccount(CheckingAccount checkAccount, AccountHolder accHolder) {
+>>>>>>> 84b2d39f8cf8075bc1c4f96b2ba3f0e3e9e0ec36
 		accHolder.setCombinedBalance(accHolder.getCombinedBalance() + checkAccount.getBalance());
 		checkAccount.setAccountHolder(accHolder);
 		dbaCheckAccRepo.save(checkAccount);
@@ -57,8 +67,18 @@ public class AccountHolderServiceImpl {
 		personalCheckAccRepo.delete(checkAccount);
 	}
 	
+<<<<<<< HEAD
 	public DBACheckingAccount getDBACheckingAccountById(int Id) throws NoSuchResourceFoundException {
 		return (DBACheckingAccount) dbaCheckAccRepo.findById(Id).orElseThrow(() -> new NoSuchResourceFoundException("Account Not Found"));
+=======
+	public void deleteCheckingAccount(CheckingAccount checkAccount, AccountHolder accHolder) {
+		accHolder.setCombinedBalance(accHolder.getCombinedBalance() - checkAccount.getBalance());
+		checkAccRepo.delete(checkAccount);
+	}
+	
+	public CheckingAccount getCheckingAccountById(int Id) throws NoSuchResourceFoundException {
+		return (CheckingAccount) checkAccRepo.findById(Id).orElseThrow(() -> new NoSuchResourceFoundException("Account Not Found"));
+>>>>>>> 84b2d39f8cf8075bc1c4f96b2ba3f0e3e9e0ec36
 	}
 	
 	public PersonalCheckingAccount getPersonalCheckingAccountById(int Id) throws NoSuchResourceFoundException {

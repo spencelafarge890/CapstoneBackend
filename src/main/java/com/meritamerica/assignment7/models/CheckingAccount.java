@@ -22,10 +22,14 @@ import com.meritamerica.assignment7.services.MeritBankService;
 
 
 @MappedSuperclass
+<<<<<<< HEAD
 public abstract class CheckingAccount extends BankAccount {
 	
 	
 	
+=======
+public class CheckingAccount extends BankAccount {
+>>>>>>> 84b2d39f8cf8075bc1c4f96b2ba3f0e3e9e0ec36
 	
 	
 	

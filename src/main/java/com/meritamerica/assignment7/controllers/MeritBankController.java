@@ -125,6 +125,7 @@ public class MeritBankController {
 		return checkingAccount;
 	}
 	
+<<<<<<< HEAD
 	@PutMapping("/account-holders/{id}/dba-checking-accounts")
 	@ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
 	@Secured("ROLE_ADMIN")
@@ -133,6 +134,16 @@ public class MeritBankController {
 					throws NoSuchResourceFoundException, ExceedsCombinedBalanceLimitException {
 		AccountHolder accHolder = meritBankSvc.getAccountHolderById(id);
 		accountHolderSvc.deleteDBACheckingAccount(checkingAccount, accHolder);
+=======
+	@PutMapping("/account-holders/{id}/checking-accounts")
+	@ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
+	@Secured("ROLE_ADMIN")
+	public void deleteCheckingAccount(
+			@PathVariable int id, @RequestBody @Valid CheckingAccount checkingAccount) 
+					throws NoSuchResourceFoundException, ExceedsCombinedBalanceLimitException {
+		AccountHolder accHolder = meritBankSvc.getAccountHolderById(id);
+		accountHolderSvc.deleteCheckingAccount(checkingAccount, accHolder);
+>>>>>>> 84b2d39f8cf8075bc1c4f96b2ba3f0e3e9e0ec36
 	}
 
 	@GetMapping("/account-holders/{id}/dba-checking-accounts")
