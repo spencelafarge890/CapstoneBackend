@@ -6,18 +6,26 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.meritamerica.assignment7.models.transactions.Deposit;
+import com.meritamerica.assignment7.models.transactions.Transaction;
+import com.meritamerica.assignment7.models.transactions.Transfer;
+import com.meritamerica.assignment7.models.transactions.Withdrawl;
 
 import java.lang.NumberFormatException;
 import java.text.ParseException;
@@ -42,7 +50,16 @@ public abstract class BankAccount {
 	@NotNull
 	@Column(name = "interest_rate")
 	protected double interestRate;
-	//private List<Transaction> transactions = new ArrayList<Transaction>();
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Transaction> deposits;
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Withdrawl> withdrawls;
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Transfer> transfers;
+
 	
 	public BankAccount() {
 		this.accountOpenedOn = new Date();
@@ -117,14 +134,6 @@ public abstract class BankAccount {
 		} else return false;
 	}
 	
-	/*public double futureValue(double years) {
-		if (years == 1) {
-			return 1;
-		}
-		return (getBalance() * Math.pow((1+interestRate), years));
-	}*/
-	
-	
 
 	@Override
 	public String toString() {
@@ -134,9 +143,4 @@ public abstract class BankAccount {
 				+ "," + dateString;
 	}
 
-	
-	/*public void addTransaction(Transaction transaction) {
-		transactions.add(transaction);
-	}*/
-	
 }

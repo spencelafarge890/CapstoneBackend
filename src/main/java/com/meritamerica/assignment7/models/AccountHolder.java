@@ -22,11 +22,12 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 public class AccountHolder implements Comparable<AccountHolder>{
-	private static int nextId = 1;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	
 	
 	public void setId(Integer id) {
 		this.id = id;
@@ -40,8 +41,11 @@ public class AccountHolder implements Comparable<AccountHolder>{
 	@JoinColumn(name = "id", referencedColumnName = "id")
 	private AccountHolderContact accHolderCont;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accountHolder")
-	private List<CheckingAccount> checkingAccounts;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "accountHolder")
+	private List<DBACheckingAccount> dbaCheckingAccounts;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "accountHolder")
+	private List<PersonalCheckingAccount> personalCheckingAccounts;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "accountHolder")
 	private List<SavingsAccount> savingsAccounts;
@@ -53,8 +57,10 @@ public class AccountHolder implements Comparable<AccountHolder>{
 	@NotNull(message="First name field must not be blank")
 	@Column(name = "first_name")
 	private String firstName;
+	
 	@Column(name = "middle_name")
 	private String middleName;
+	
 	@Column(name = "last_name")
 	@NotBlank(message="Last name field must not be blank")
 	@NotNull(message="Last name field must not be blank")
@@ -68,7 +74,6 @@ public class AccountHolder implements Comparable<AccountHolder>{
 	@OneToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private MeritBankUser mbUser;
-	
 	
 	public MeritBankUser getMbUser() {
 		return mbUser;
@@ -87,7 +92,6 @@ public class AccountHolder implements Comparable<AccountHolder>{
 	}
 
 	public AccountHolder() {
-		this.id = nextId++;
 	}
 	
 	public AccountHolderContact getAccHolderCont() {
@@ -130,14 +134,6 @@ public class AccountHolder implements Comparable<AccountHolder>{
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	public static int getNextId() {
-		return nextId;
-	}
-
-	public static void setNextId(int nextId) {
-		AccountHolder.nextId = nextId;
-	}
 
 	public double getCombinedBalance() {
 		return combinedBalance;
@@ -147,12 +143,20 @@ public class AccountHolder implements Comparable<AccountHolder>{
 		this.combinedBalance = combinedBalance;
 	}
 
-	public List<CheckingAccount> getCheckingAccounts() {
-		return checkingAccounts;
+	public List<DBACheckingAccount> getDbaCheckingAccounts() {
+		return dbaCheckingAccounts;
 	}
 
-	public void setCheckingAccounts(List<CheckingAccount> checkingAccounts) {
-		this.checkingAccounts = checkingAccounts;
+	public void setDbaCheckingAccounts(List<DBACheckingAccount> dbaCheckingAccounts) {
+		this.dbaCheckingAccounts = dbaCheckingAccounts;
+	}
+
+	public List<PersonalCheckingAccount> getPersonalCheckingAccounts() {
+		return personalCheckingAccounts;
+	}
+
+	public void setPersonalCheckingAccounts(List<PersonalCheckingAccount> personalCheckingAccounts) {
+		this.personalCheckingAccounts = personalCheckingAccounts;
 	}
 
 	public List<SavingsAccount> getSavingsAccounts() {

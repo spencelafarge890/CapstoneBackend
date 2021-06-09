@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.meritamerica.assignment7.models.AccountHolder;
 import com.meritamerica.assignment7.models.CDOffering;
-import com.meritamerica.assignment7.models.NoSuchResourceFoundException;
+import com.meritamerica.assignment7.models.exceptions.NoSuchResourceFoundException;
 import com.meritamerica.assignment7.repositories.AccountHolderRepository;
 import com.meritamerica.assignment7.repositories.CDOfferingRepository;
 

@@ -6,20 +6,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.meritamerica.assignment7.models.AccountHolder;
-import com.meritamerica.assignment7.models.BankAccount;
 import com.meritamerica.assignment7.models.CDAccount;
-import com.meritamerica.assignment7.models.CheckingAccount;
-import com.meritamerica.assignment7.models.NoSuchResourceFoundException;
+import com.meritamerica.assignment7.models.DBACheckingAccount;
+import com.meritamerica.assignment7.models.PersonalCheckingAccount;
 import com.meritamerica.assignment7.models.SavingsAccount;
+import com.meritamerica.assignment7.models.exceptions.NoSuchResourceFoundException;
 import com.meritamerica.assignment7.repositories.CDAccountRepository;
-import com.meritamerica.assignment7.repositories.CheckingAccountRepository;
+import com.meritamerica.assignment7.repositories.DBACheckingAccountRepository;
+import com.meritamerica.assignment7.repositories.PersonalCheckingAccountRepository;
 import com.meritamerica.assignment7.repositories.SavingsAccountRepository;
 
 @Service
 public class AccountHolderServiceImpl {
 	
 	@Autowired
-	private CheckingAccountRepository checkAccRepo;
+	private DBACheckingAccountRepository dbaCheckAccRepo;
+	
+	@Autowired
+	private PersonalCheckingAccountRepository personalCheckAccRepo;
 	
 	@Autowired
 	private SavingsAccountRepository savingAccRepo;
@@ -27,22 +31,46 @@ public class AccountHolderServiceImpl {
 	@Autowired
 	private CDAccountRepository cdAccRepo;
 	
-	public List<CheckingAccount> getCheckingAccounts() {
-		 return checkAccRepo.findAll();
+	public List<DBACheckingAccount> getDBACheckingAccounts() {
+		 return dbaCheckAccRepo.findAll();
 	}
 	
-	public void addCheckingAccount(CheckingAccount checkAccount, AccountHolder accHolder) {
+	public void addPersonalCheckingAccount(PersonalCheckingAccount checkAccount, AccountHolder accHolder) {
 		accHolder.setCombinedBalance(accHolder.getCombinedBalance() + checkAccount.getBalance());
 		checkAccount.setAccountHolder(accHolder);
-		checkAccRepo.save(checkAccount);
+		personalCheckAccRepo.save(checkAccount);
 	}
 	
-	public CheckingAccount getCheckingAccountById(int Id) throws NoSuchResourceFoundException {
-		return (CheckingAccount) checkAccRepo.findById(Id).orElseThrow(() -> new NoSuchResourceFoundException("Account Not Found"));
+	public void addDBACheckingAccount(DBACheckingAccount checkAccount, AccountHolder accHolder) {
+		accHolder.setCombinedBalance(accHolder.getCombinedBalance() + checkAccount.getBalance());
+		checkAccount.setAccountHolder(accHolder);
+		dbaCheckAccRepo.save(checkAccount);
 	}
 	
-	public List<CheckingAccount> getCheckingAccountsByAccountHolder(AccountHolder accountHolder) {
-		 return checkAccRepo.findBankAccountByAccountHolder(accountHolder);
+	public void deleteDBACheckingAccount(DBACheckingAccount checkAccount, AccountHolder accHolder) {
+		accHolder.setCombinedBalance(accHolder.getCombinedBalance() - checkAccount.getBalance());
+		dbaCheckAccRepo.delete(checkAccount);
+	}
+	
+	public void deletePersonalCheckingAccount(PersonalCheckingAccount checkAccount, AccountHolder accHolder) {
+		accHolder.setCombinedBalance(accHolder.getCombinedBalance() - checkAccount.getBalance());
+		personalCheckAccRepo.delete(checkAccount);
+	}
+	
+	public DBACheckingAccount getDBACheckingAccountById(int Id) throws NoSuchResourceFoundException {
+		return (DBACheckingAccount) dbaCheckAccRepo.findById(Id).orElseThrow(() -> new NoSuchResourceFoundException("Account Not Found"));
+	}
+	
+	public PersonalCheckingAccount getPersonalCheckingAccountById(int Id) throws NoSuchResourceFoundException {
+		return (PersonalCheckingAccount) personalCheckAccRepo.findById(Id).orElseThrow(() -> new NoSuchResourceFoundException("Account Not Found"));
+	}
+	
+	public List<DBACheckingAccount> getDBACheckingAccountsByAccountHolder(AccountHolder accountHolder) {
+		 return dbaCheckAccRepo.findBankAccountByAccountHolder(accountHolder);
+	}
+	
+	public List<PersonalCheckingAccount> getPersonalCheckingAccountsByAccountHolder(AccountHolder accountHolder) {
+		 return personalCheckAccRepo.findBankAccountByAccountHolder(accountHolder);
 	}
 	
 	public List<SavingsAccount> getSavingsAccounts() {
@@ -57,6 +85,11 @@ public class AccountHolderServiceImpl {
 		accHolder.setCombinedBalance(accHolder.getCombinedBalance() + savingsAccount.getBalance());
 		savingsAccount.setAccountHolder(accHolder);
 		savingAccRepo.save(savingsAccount);
+	}
+	
+	public void deleteSavingsAccount(SavingsAccount savingsAccount, AccountHolder accHolder) {
+		accHolder.setCombinedBalance(accHolder.getCombinedBalance() - savingsAccount.getBalance());
+		savingAccRepo.delete(savingsAccount);
 	}
 	
 	public SavingsAccount getSavingsAccountById(int Id) throws NoSuchResourceFoundException {
@@ -81,12 +114,20 @@ public class AccountHolderServiceImpl {
 		 return cdAccRepo.findBankAccountByAccountHolder(accountHolder);
 	}
 
-	public CheckingAccountRepository getCheckAccRepo() {
-		return checkAccRepo;
+	public DBACheckingAccountRepository getDBACheckAccRepo() {
+		return dbaCheckAccRepo;
+	}
+	
+	public PersonalCheckingAccountRepository getPersonalCheckAccRepo() {
+		return personalCheckAccRepo;
 	}
 
-	public void setCheckAccRepo(CheckingAccountRepository checkAccRepo) {
-		this.checkAccRepo = checkAccRepo;
+	public void setDBACheckAccRepo(DBACheckingAccountRepository checkAccRepo) {
+		this.dbaCheckAccRepo = checkAccRepo;
+	}
+	
+	public void setPersonalCheckAccRepo(PersonalCheckingAccountRepository checkAccRepo) {
+		this.personalCheckAccRepo = checkAccRepo;
 	}
 
 	public SavingsAccountRepository getSavingAccRepo() {

@@ -56,6 +56,7 @@ public class JwtUtil {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
+    
     public MeritBankUser getCurrentUser() {
 	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		MeritBankUser user = (MeritBankUser) auth.getPrincipal();

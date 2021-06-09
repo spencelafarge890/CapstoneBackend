@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,17 +30,18 @@ import com.meritamerica.assignment7.models.AuthenticationResponse;
 import com.meritamerica.assignment7.models.CDAccount;
 import com.meritamerica.assignment7.models.CDAccountCreator;
 import com.meritamerica.assignment7.models.CheckingAccount;
-import com.meritamerica.assignment7.models.ExceedsCombinedBalanceLimitException;
-import com.meritamerica.assignment7.models.NegativeAmountException;
-import com.meritamerica.assignment7.models.NoSuchResourceFoundException;
+import com.meritamerica.assignment7.models.DBACheckingAccount;
+import com.meritamerica.assignment7.models.PersonalCheckingAccount;
 import com.meritamerica.assignment7.models.SavingsAccount;
+import com.meritamerica.assignment7.models.exceptions.ExceedsCombinedBalanceLimitException;
+import com.meritamerica.assignment7.models.exceptions.NegativeAmountException;
+import com.meritamerica.assignment7.models.exceptions.NoSuchResourceFoundException;
 import com.meritamerica.assignment7.models.MeritBankUser;
 import com.meritamerica.assignment7.services.AccountHolderServiceImpl;
 import com.meritamerica.assignment7.services.MeritBankServiceImpl;
 import com.meritamerica.assignment7.services.MeritUserDetailsService;
 import com.meritamerica.assignment7.util.JwtUtil;
 
-@CrossOrigin
 @RestController
 public class MeritBankController {
 	
@@ -110,25 +112,67 @@ public class MeritBankController {
 		return meritBankSvc.getAccountHolderById(id);
 	}
 	
-	@PostMapping("/account-holders/{id}/checking-accounts")
+	@PostMapping("/account-holders/{id}/dba-checking-accounts")
 	@ResponseStatus(HttpStatus.CREATED)
 	@Secured("ROLE_ADMIN")
-	public CheckingAccount postCheckingAccount(
-			@PathVariable int id, @RequestBody @Valid CheckingAccount checkingAccount) 
+	public DBACheckingAccount postDBACheckingAccount(
+			@PathVariable int id, @RequestBody @Valid DBACheckingAccount checkingAccount) 
 					throws NoSuchResourceFoundException, ExceedsCombinedBalanceLimitException {
 		AccountHolder accHolder = meritBankSvc.getAccountHolderById(id);
 		checkingAccount.setAccountHolder(accHolder);
 		System.out.println(checkingAccount.getAccountHolder());
-		accountHolderSvc.addCheckingAccount(checkingAccount, accHolder);
+		accountHolderSvc.addDBACheckingAccount(checkingAccount, accHolder);
 		return checkingAccount;
 	}
+	
+	@PutMapping("/account-holders/{id}/dba-checking-accounts")
+	@ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
+	@Secured("ROLE_ADMIN")
+	public void deleteDBACheckingAccount(
+			@PathVariable int id, @RequestBody @Valid DBACheckingAccount checkingAccount) 
+					throws NoSuchResourceFoundException, ExceedsCombinedBalanceLimitException {
+		AccountHolder accHolder = meritBankSvc.getAccountHolderById(id);
+		accountHolderSvc.deleteDBACheckingAccount(checkingAccount, accHolder);
+	}
 
-	@GetMapping("/account-holders/{id}/checking-accounts")
+	@GetMapping("/account-holders/{id}/dba-checking-accounts")
 	@ResponseStatus(HttpStatus.OK)
 	@Secured("ROLE_ADMIN")
-	public List<CheckingAccount> getCheckingAccountsById(
+	public List<DBACheckingAccount> getDBACheckingAccountsById(
 			@PathVariable int id) throws NoSuchResourceFoundException {
-		return accountHolderSvc.getCheckingAccountsByAccountHolder(
+		return accountHolderSvc.getDBACheckingAccountsByAccountHolder(
+				meritBankSvc.getAccountHolderById(id));
+	}
+	
+	@PostMapping("/account-holders/{id}/personal-checking-accounts")
+	@ResponseStatus(HttpStatus.CREATED)
+	@Secured("ROLE_ADMIN")
+	public PersonalCheckingAccount postPersonalCheckingAccount(
+			@PathVariable int id, @RequestBody @Valid PersonalCheckingAccount checkingAccount) 
+					throws NoSuchResourceFoundException, ExceedsCombinedBalanceLimitException {
+		AccountHolder accHolder = meritBankSvc.getAccountHolderById(id);
+		checkingAccount.setAccountHolder(accHolder);
+		System.out.println(checkingAccount.getAccountHolder());
+		accountHolderSvc.addPersonalCheckingAccount(checkingAccount, accHolder);
+		return checkingAccount;
+	}
+	
+	@PutMapping("/account-holders/{id}/personal-checking-accounts")
+	@ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
+	@Secured("ROLE_ADMIN")
+	public void deletePersonalCheckingAccount(
+			@PathVariable int id, @RequestBody @Valid PersonalCheckingAccount checkingAccount) 
+					throws NoSuchResourceFoundException, ExceedsCombinedBalanceLimitException {
+		AccountHolder accHolder = meritBankSvc.getAccountHolderById(id);
+		accountHolderSvc.deletePersonalCheckingAccount(checkingAccount, accHolder);
+	}
+	
+	@GetMapping("/account-holders/{id}/personal-checking-accounts")
+	@ResponseStatus(HttpStatus.OK)
+	@Secured("ROLE_ADMIN")
+	public List<PersonalCheckingAccount> getPersonalCheckingAccountsById(
+			@PathVariable int id) throws NoSuchResourceFoundException {
+		return accountHolderSvc.getPersonalCheckingAccountsByAccountHolder(
 				meritBankSvc.getAccountHolderById(id));
 	}
 	
@@ -141,6 +185,17 @@ public class MeritBankController {
 		AccountHolder accHolder = meritBankSvc.getAccountHolderById(id);
 		savingsAccount.setAccountHolder(accHolder);
 		accountHolderSvc.addSavingsAccount(savingsAccount, accHolder);
+		return savingsAccount;
+	}
+	
+	@PutMapping("/account-holders/{id}/savings-accounts")
+	@ResponseStatus(HttpStatus.CREATED)
+	@Secured("ROLE_ADMIN")
+	public SavingsAccount deleteSavingsAccount(
+			@PathVariable int id, @RequestBody @Valid SavingsAccount savingsAccount ) 
+					throws NoSuchResourceFoundException, NegativeAmountException, ExceedsCombinedBalanceLimitException {
+		AccountHolder accHolder = meritBankSvc.getAccountHolderById(id);
+		accountHolderSvc.deleteSavingsAccount(savingsAccount, accHolder);
 		return savingsAccount;
 	}
 	
