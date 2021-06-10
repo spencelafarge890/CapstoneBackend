@@ -43,6 +43,7 @@ import com.meritamerica.assignment7.services.MeritBankServiceImpl;
 import com.meritamerica.assignment7.services.MeritUserDetailsService;
 import com.meritamerica.assignment7.util.JwtUtil;
 
+@CrossOrigin
 @RestController
 public class MeritBankController {
 	
@@ -65,6 +66,12 @@ public class MeritBankController {
 	@ResponseStatus(HttpStatus.OK)
 	public String welcomeMessage() {
 		return "Welcome to Merit Bank!";
+	}
+	
+	@GetMapping("/users")
+	@ResponseStatus(HttpStatus.OK)
+	public List<MeritBankUser> getAllUsers() {
+		return meritUserDetailService.getAllUsers();
 	}
 	
 	@ResponseStatus(HttpStatus.OK)

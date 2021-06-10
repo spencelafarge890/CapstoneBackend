@@ -1,5 +1,7 @@
 package com.meritamerica.assignment7.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,6 +17,10 @@ public class MeritUserDetailsService implements UserDetailsService{
 
 	@Autowired
 	private MeritBankUserRepository mbUserRepository;
+	
+	public List<MeritBankUser> getAllUsers() {
+		return mbUserRepository.findAll();
+	}
 	
 	@Override
 	public MeritBankUser loadUserByUsername(String userName) throws UsernameNotFoundException {
@@ -46,6 +52,5 @@ public class MeritUserDetailsService implements UserDetailsService{
 			return false;
 		}
 	}
-	
 
 }

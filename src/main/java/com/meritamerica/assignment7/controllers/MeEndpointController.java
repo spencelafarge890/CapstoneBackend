@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +28,7 @@ import com.meritamerica.assignment7.services.MeritBankServiceImpl;
 import com.meritamerica.assignment7.services.MeritUserDetailsService;
 import com.meritamerica.assignment7.util.JwtUtil;
 
+@CrossOrigin
 @RestController
 public class MeEndpointController {
 	
@@ -47,8 +49,9 @@ public class MeEndpointController {
 	
 	@GetMapping("/me")
 	@Secured("ROLE_USER")
-	public MeritBankUser getAccountHolderByUserId() {
-		return jwtUtil.getCurrentUser();
+	public AccountHolder getAccountHolderByUserId() throws NoSuchResourceFoundException {
+		
+		return meritBankSvc.getAccountHolderByUser(jwtUtil.getCurrentUser());
 	}
 	
 	

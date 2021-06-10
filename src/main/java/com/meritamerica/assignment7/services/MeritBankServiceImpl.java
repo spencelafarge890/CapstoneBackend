@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.meritamerica.assignment7.models.AccountHolder;
 import com.meritamerica.assignment7.models.CDOffering;
+import com.meritamerica.assignment7.models.MeritBankUser;
 import com.meritamerica.assignment7.models.exceptions.NoSuchResourceFoundException;
 import com.meritamerica.assignment7.repositories.AccountHolderRepository;
 import com.meritamerica.assignment7.repositories.CDOfferingRepository;
@@ -38,6 +39,10 @@ public class MeritBankServiceImpl extends MeritBankService {
 	
 	public AccountHolder getAccountHolderById(int id) throws NoSuchResourceFoundException {
 		return accHolderRepo.findById(id).orElseThrow(() -> new NoSuchResourceFoundException("Account Holder not found by given id"));
+	}
+	
+	public AccountHolder getAccountHolderByUser(MeritBankUser mbUser) throws NoSuchResourceFoundException {
+		return accHolderRepo.findByMbUser(mbUser);
 	}
 	
 	public void addAccountHolder(AccountHolder accountHolder) {

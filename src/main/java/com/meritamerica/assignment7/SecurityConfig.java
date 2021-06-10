@@ -22,6 +22,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.header.writers.StaticHeadersWriter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -59,21 +60,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.cors().and().csrf().disable();
+		httpSecurity.csrf().disable();
 		 httpSecurity.authorizeRequests()
-         .antMatchers("/authenticate").permitAll()
-         .antMatchers("/h2-console/**").permitAll()
-         .antMatchers("/v3/api-docs/**").permitAll()
+        .antMatchers("/authenticate").permitAll()
+        .antMatchers("/h2-console/**").permitAll()
+        .antMatchers("/v3/api-docs/**").permitAll()
 		 .antMatchers("/swagger-ui/**").permitAll()
 		 .antMatchers("/swagger-ui.html").permitAll()
-         .anyRequest().authenticated().and()
+        .anyRequest().authenticated().and()
 			.exceptionHandling().and().sessionManagement()
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		httpSecurity.headers().frameOptions().disable();
-		//httpSecurity.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll();
-
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 	}
+	
+	
+	
+	/*@Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("**", new CorsConfiguration().applyPermitDefaultValues());
+        return source;
+    }*/
 	
 	@Bean
 	public AuthenticationManager authenticationManagerBean() throws Exception {

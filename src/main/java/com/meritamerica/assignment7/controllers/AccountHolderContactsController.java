@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import com.meritamerica.assignment7.models.AccountHolderContact;
 import com.meritamerica.assignment7.models.AuthenticationRequest;
 import com.meritamerica.assignment7.repositories.*;
 
+@CrossOrigin
 @RestController
 public class AccountHolderContactsController {
 	
