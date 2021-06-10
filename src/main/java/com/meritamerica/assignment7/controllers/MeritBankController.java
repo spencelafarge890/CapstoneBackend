@@ -142,7 +142,7 @@ public class MeritBankController {
 	}
 	
 
-	@PutMapping("/account-holders/{id}/dba-checking-accounts")
+	@PostMapping("/account-holders/{id}/dba-checking-accounts/delete")
 	@ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
 	@Secured("ROLE_ADMIN")
 	public void deleteDBACheckingAccount(
@@ -174,7 +174,7 @@ public class MeritBankController {
 		return checkingAccount;
 	}
 	
-	@PutMapping("/account-holders/{id}/personal-checking-accounts")
+	@PostMapping("/account-holders/{id}/personal-checking-accounts/delete")
 	@ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
 	@Secured("ROLE_ADMIN")
 	public void deletePersonalCheckingAccount(
@@ -205,8 +205,8 @@ public class MeritBankController {
 		return savingsAccount;
 	}
 	
-	@PutMapping("/account-holders/{id}/savings-accounts")
-	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping("/account-holders/{id}/savings-accounts/delete")
+	@ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
 	@Secured("ROLE_ADMIN")
 	public SavingsAccount deleteSavingsAccount(
 			@PathVariable int id, @RequestBody @Valid SavingsAccount savingsAccount ) 
@@ -224,6 +224,7 @@ public class MeritBankController {
 		return accountHolderSvc.getSavingsAccountsByAccountHolder(
 				meritBankSvc.getAccountHolderById(id));
 	}
+	
 	
 	@PostMapping("/account-holders/{id}/cd-accounts")
 	@ResponseStatus(HttpStatus.CREATED)
@@ -244,6 +245,17 @@ public class MeritBankController {
 			@PathVariable int id) throws NoSuchResourceFoundException{
 		return accountHolderSvc.getCDAccountsByAccountHolder(
 				meritBankSvc.getAccountHolderById(id));
+	}
+	
+	@PostMapping("/account-holders/{id}/cd-accounts/delete")
+	@ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
+	@Secured("ROLE_ADMIN")
+	public CDAccount deleteCDAccount(
+			@PathVariable int id, @RequestBody @Valid CDAccount cdAccount ) 
+					throws NoSuchResourceFoundException, NegativeAmountException, ExceedsCombinedBalanceLimitException {
+		AccountHolder accHolder = meritBankSvc.getAccountHolderById(id);
+		accountHolderSvc.deleteCDAccount(cdAccount, accHolder);
+		return cdAccount;
 	}
 	
 	

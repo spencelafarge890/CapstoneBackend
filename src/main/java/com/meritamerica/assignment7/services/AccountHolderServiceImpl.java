@@ -2,6 +2,8 @@ package com.meritamerica.assignment7.services;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -148,5 +150,10 @@ public class AccountHolderServiceImpl {
 
 	public void setCdAccRepo(CDAccountRepository cdAccRepo) {
 		this.cdAccRepo = cdAccRepo;
+	}
+
+	public void deleteCDAccount(@Valid CDAccount cdAccount, AccountHolder accHolder) {
+		accHolder.setCombinedBalance(accHolder.getCombinedBalance() - cdAccount.getBalance());
+		cdAccRepo.delete(cdAccount);
 	}
 }
