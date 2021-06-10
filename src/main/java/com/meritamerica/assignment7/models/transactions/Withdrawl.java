@@ -17,5 +17,7 @@ import com.meritamerica.assignment7.models.BankAccount;
 @DiscriminatorValue("withdrawl")
 public class Withdrawl extends Transaction {
 	
-	
+	public Withdrawl() {
+		this.setTransactionType("withdrawl");
+	}
 }

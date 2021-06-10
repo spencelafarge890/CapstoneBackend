@@ -28,7 +28,6 @@ public abstract class Transaction {
 	@Column(name = "amount")
 	private double amount;
 	
-	
 	private Date transactionDate;
 	
 	@NotNull
@@ -36,9 +35,22 @@ public abstract class Transaction {
 	@Column(name = "origin")
 	private String origin;
 	
+	@NotNull
+	@NotBlank
+	@Column(name = "transaction_type")
+	private String transactionType;
+	
 	
 	public String getOrigin() {
 		return origin;
+	}
+
+	public String getTransactionType() {
+		return transactionType;
+	}
+
+	public void setTransactionType(String transactionType) {
+		this.transactionType = transactionType;
 	}
 
 	public void setOrigin(String origin) {

@@ -17,6 +17,8 @@ import com.meritamerica.assignment7.models.BankAccount;
 @DiscriminatorValue("deposit")
 public class Deposit extends Transaction {
 	
-
+	public Deposit() {
+		this.setTransactionType("deposit");
+	}
 	
 }

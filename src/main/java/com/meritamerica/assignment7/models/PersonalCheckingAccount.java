@@ -1,6 +1,5 @@
 package com.meritamerica.assignment7.models;
 
-<<<<<<< HEAD
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -30,11 +29,5 @@ public class PersonalCheckingAccount extends CheckingAccount{
 	public void setAccountHolder(AccountHolder accountHolder) {
 		this.accountHolder = accountHolder;
 	}
-=======
-import javax.persistence.Entity;
 
-@Entity
-public class PersonalCheckingAccount extends CheckingAccount{
-
->>>>>>> 84b2d39f8cf8075bc1c4f96b2ba3f0e3e9e0ec36
 }

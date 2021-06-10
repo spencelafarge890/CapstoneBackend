@@ -52,14 +52,9 @@ public abstract class BankAccount {
 	protected double interestRate;
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Transaction> deposits;
+	@JoinColumn(name = "account", referencedColumnName = "id")
+	private List<Transaction> transactions;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Withdrawl> withdrawls;
-	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Transfer> transfers;
-
 	
 	public BankAccount() {
 		this.accountOpenedOn = new Date();
@@ -84,6 +79,10 @@ public abstract class BankAccount {
 		this.interestRate = interestRate;
 		//MeritBankService.getNextAccountNumber();
 		this.accountOpenedOn = accountOpenedOn;
+	}
+	
+	public void addTransaction(Transaction transaction) {
+		this.transactions.add(transaction);
 	}
 	
 	public Integer getId() {
@@ -117,23 +116,14 @@ public abstract class BankAccount {
 	public void setAccountOpenedOn(Date date) {
 		accountOpenedOn = date;
 	}
-	
-	public boolean withdraw(double amount) {
-		if (amount <= balance && amount > 0) {
-			balance -= amount;
-			return true;
-		} else {
-			return false;
-		}
+
+	public List<Transaction> getTransactions() {
+		return transactions;
 	}
-	
-	public boolean deposit(double amount) {
-		if (amount > 0) {
-			balance += amount;
-			return true;
-		} else return false;
+
+	public void setTransactions(List<Transaction> transactions) {
+		this.transactions = transactions;
 	}
-	
 
 	@Override
 	public String toString() {

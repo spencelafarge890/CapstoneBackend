@@ -64,15 +64,6 @@ public class CDAccount extends BankAccount {
 		this.accountHolder = accountHolder;
 	}
 	
-	@Override
-	public boolean withdraw(double amount) {
-			return false;
-	}
-	
-	@Override
-	public boolean deposit(double amount) {
-			return false;
-	}
 	/*
 	public double futureValue() {
 	    if (tempTerm == 0) {
