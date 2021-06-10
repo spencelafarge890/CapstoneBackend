@@ -56,6 +56,10 @@ public class MeritBankServiceImpl extends MeritBankService {
 		return cdOfferingRepo.findAll();
 	}
 	
+	public void saveCDOffering(CDOffering offering) {
+		cdOfferingRepo.save(offering);
+	}
+	
 	public CDOffering getBestCDOffering() {
 		ArrayList<CDOffering> cdoList = (ArrayList<CDOffering>) cdOfferingRepo.findAll();
 		Collections.sort(cdoList);

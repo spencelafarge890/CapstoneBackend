@@ -29,6 +29,7 @@ import com.meritamerica.assignment7.models.AuthenticationRequest;
 import com.meritamerica.assignment7.models.AuthenticationResponse;
 import com.meritamerica.assignment7.models.CDAccount;
 import com.meritamerica.assignment7.models.CDAccountCreator;
+import com.meritamerica.assignment7.models.CDOffering;
 import com.meritamerica.assignment7.models.CheckingAccount;
 import com.meritamerica.assignment7.models.DBACheckingAccount;
 import com.meritamerica.assignment7.models.PersonalCheckingAccount;
@@ -79,6 +80,21 @@ public class MeritBankController {
 		 
 		return ResponseEntity.ok(new AuthenticationResponse(jwt));
 	}
+	
+	@GetMapping("/cd-accounts")
+	@ResponseStatus(HttpStatus.OK)
+	@Secured("ROLE_ADMIN")
+    public List<CDOffering> getCDOfferings() { 
+        return meritBankSvc.getAllCDOfferings();
+    }
+
+    @PostMapping("/cd-offerings")
+    @ResponseStatus(HttpStatus.CREATED)
+    @Secured("ROLE_ADMIN")
+    public CDOffering createCDOffering(@Valid @RequestBody CDOffering cdOffering) {
+         meritBankSvc.saveCDOffering(cdOffering);
+         return cdOffering;
+    }
 	
 	@PostMapping("/authenticate/create-user")
 	@ResponseStatus(HttpStatus.CREATED)
@@ -229,5 +245,7 @@ public class MeritBankController {
 		return accountHolderSvc.getCDAccountsByAccountHolder(
 				meritBankSvc.getAccountHolderById(id));
 	}
+	
+	
 
 }
