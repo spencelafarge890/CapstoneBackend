@@ -43,6 +43,10 @@ public class MeritBankServiceImpl extends MeritBankService {
 	public void addAccountHolder(AccountHolder accountHolder) {
 		accHolderRepo.save(accountHolder);
 	}
+	
+	public void deleteAccountHolder(AccountHolder accountHolder) {
+		accHolderRepo.delete(accountHolder);
+	}
 
 	public CDOfferingRepository getCdOfferingRepo() {
 		return cdOfferingRepo;

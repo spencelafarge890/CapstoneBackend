@@ -114,6 +114,14 @@ public class MeritBankController {
 		return accHolder;
 	}
 	
+	@PostMapping("/account-holders/delete")
+	@ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
+	@Secured("ROLE_ADMIN")
+	public AccountHolder deleteAccountHolder(@RequestBody @Valid AccountHolder accHolder ) {
+		meritBankSvc.deleteAccountHolder(accHolder);
+		return accHolder;
+	}
+	
 	@GetMapping(value = "/account-holders")
 	@ResponseStatus(HttpStatus.OK)
 	@Secured("ROLE_ADMIN")
