@@ -81,28 +81,6 @@ public class MeritBankController {
 		return ResponseEntity.ok(new AuthenticationResponse(jwt));
 	}
 	
-	@GetMapping("/cd-accounts")
-	@ResponseStatus(HttpStatus.OK)
-	@Secured("ROLE_ADMIN")
-    public List<CDOffering> getCDOfferings() { 
-        return meritBankSvc.getAllCDOfferings();
-    }
-
-    @PostMapping("/cd-offerings")
-    @ResponseStatus(HttpStatus.CREATED)
-    @Secured("ROLE_ADMIN")
-    public CDOffering createCDOffering(@Valid @RequestBody CDOffering cdOffering) {
-         meritBankSvc.saveCDOffering(cdOffering);
-         return cdOffering;
-    }
-	
-	@PostMapping("/authenticate/create-user")
-	@ResponseStatus(HttpStatus.CREATED)
-	@Secured("ROLE_ADMIN")
-	public MeritBankUser postNewMeritBankUser(@RequestBody @Valid MeritBankUser mbUser) {
-		meritUserDetailService.addMeritBankUser(mbUser);
-		return mbUser;
-	}
 	
 	@PostMapping("/account-holders")
 	@ResponseStatus(HttpStatus.CREATED)
