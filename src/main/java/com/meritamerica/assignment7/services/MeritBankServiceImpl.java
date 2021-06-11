@@ -74,5 +74,5 @@ public class MeritBankServiceImpl extends MeritBankService {
 		Collections.sort(cdoList);
 		return cdoList.get(0);
 	}
-
+	
 }
