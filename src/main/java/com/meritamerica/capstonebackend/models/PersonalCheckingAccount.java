@@ -1,4 +1,4 @@
-package com.meritamerica.assignment7.models;
+package com.meritamerica.capstonebackend.models;
 
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
@@ -8,7 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.meritamerica.assignment7.services.MeritBankService;
+import com.meritamerica.capstonebackend.services.MeritBankService;
 
 @Entity
 public class PersonalCheckingAccount extends CheckingAccount{

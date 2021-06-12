@@ -1,4 +1,4 @@
-package com.meritamerica.assignment7.services;
+package com.meritamerica.capstonebackend.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,21 +6,21 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.meritamerica.assignment7.models.BankAccount;
-import com.meritamerica.assignment7.models.SavingsAccount;
-import com.meritamerica.assignment7.models.exceptions.ExceedsAvailableBalanceException;
-import com.meritamerica.assignment7.models.exceptions.NoSuchResourceFoundException;
-import com.meritamerica.assignment7.models.transactions.Deposit;
-import com.meritamerica.assignment7.models.transactions.Transaction;
-import com.meritamerica.assignment7.models.transactions.Transfer;
-import com.meritamerica.assignment7.models.transactions.Withdrawl;
-import com.meritamerica.assignment7.repositories.CDAccountRepository;
-import com.meritamerica.assignment7.repositories.DBACheckingAccountRepository;
-import com.meritamerica.assignment7.repositories.PersonalCheckingAccountRepository;
-import com.meritamerica.assignment7.repositories.SavingsAccountRepository;
-import com.meritamerica.assignment7.repositories.transactionRepositories.DepositRepository;
-import com.meritamerica.assignment7.repositories.transactionRepositories.TransferRepository;
-import com.meritamerica.assignment7.repositories.transactionRepositories.WithdrawlRepository;
+import com.meritamerica.capstonebackend.models.BankAccount;
+import com.meritamerica.capstonebackend.models.SavingsAccount;
+import com.meritamerica.capstonebackend.models.exceptions.ExceedsAvailableBalanceException;
+import com.meritamerica.capstonebackend.models.exceptions.NoSuchResourceFoundException;
+import com.meritamerica.capstonebackend.models.transactions.Deposit;
+import com.meritamerica.capstonebackend.models.transactions.Transaction;
+import com.meritamerica.capstonebackend.models.transactions.Transfer;
+import com.meritamerica.capstonebackend.models.transactions.Withdrawl;
+import com.meritamerica.capstonebackend.repositories.CDAccountRepository;
+import com.meritamerica.capstonebackend.repositories.DBACheckingAccountRepository;
+import com.meritamerica.capstonebackend.repositories.PersonalCheckingAccountRepository;
+import com.meritamerica.capstonebackend.repositories.SavingsAccountRepository;
+import com.meritamerica.capstonebackend.repositories.transactionRepositories.DepositRepository;
+import com.meritamerica.capstonebackend.repositories.transactionRepositories.TransferRepository;
+import com.meritamerica.capstonebackend.repositories.transactionRepositories.WithdrawlRepository;
 
 @Service
 public class BankAccountServiceImpl {

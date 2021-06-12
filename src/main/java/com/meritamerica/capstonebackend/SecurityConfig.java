@@ -1,4 +1,4 @@
-package com.meritamerica.assignment7;
+package com.meritamerica.capstonebackend;
 
 import java.util.Arrays;
 
@@ -30,8 +30,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import com.meritamerica.assignment7.filters.JwtRequestFilter;
-import com.meritamerica.assignment7.services.MeritUserDetailsService;
+import com.meritamerica.capstonebackend.filters.JwtRequestFilter;
+import com.meritamerica.capstonebackend.services.MeritUserDetailsService;
 
 
 

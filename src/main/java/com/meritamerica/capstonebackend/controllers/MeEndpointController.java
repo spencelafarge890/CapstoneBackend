@@ -1,4 +1,4 @@
-package com.meritamerica.assignment7.controllers;
+package com.meritamerica.capstonebackend.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,21 +12,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.meritamerica.assignment7.models.AccountHolder;
-import com.meritamerica.assignment7.models.BankAccount;
-import com.meritamerica.assignment7.models.CDAccount;
-import com.meritamerica.assignment7.models.DBACheckingAccount;
-import com.meritamerica.assignment7.models.MeritBankUser;
-import com.meritamerica.assignment7.models.PersonalCheckingAccount;
-import com.meritamerica.assignment7.models.SavingsAccount;
-import com.meritamerica.assignment7.models.exceptions.ExceedsAvailableBalanceException;
-import com.meritamerica.assignment7.models.exceptions.NoSuchResourceFoundException;
-import com.meritamerica.assignment7.models.transactions.Transaction;
-import com.meritamerica.assignment7.services.AccountHolderServiceImpl;
-import com.meritamerica.assignment7.services.BankAccountServiceImpl;
-import com.meritamerica.assignment7.services.MeritBankServiceImpl;
-import com.meritamerica.assignment7.services.MeritUserDetailsService;
-import com.meritamerica.assignment7.util.JwtUtil;
+import com.meritamerica.capstonebackend.models.AccountHolder;
+import com.meritamerica.capstonebackend.models.BankAccount;
+import com.meritamerica.capstonebackend.models.CDAccount;
+import com.meritamerica.capstonebackend.models.DBACheckingAccount;
+import com.meritamerica.capstonebackend.models.MeritBankUser;
+import com.meritamerica.capstonebackend.models.PersonalCheckingAccount;
+import com.meritamerica.capstonebackend.models.SavingsAccount;
+import com.meritamerica.capstonebackend.models.exceptions.ExceedsAvailableBalanceException;
+import com.meritamerica.capstonebackend.models.exceptions.NoSuchResourceFoundException;
+import com.meritamerica.capstonebackend.models.transactions.Transaction;
+import com.meritamerica.capstonebackend.services.AccountHolderServiceImpl;
+import com.meritamerica.capstonebackend.services.BankAccountServiceImpl;
+import com.meritamerica.capstonebackend.services.MeritBankServiceImpl;
+import com.meritamerica.capstonebackend.services.MeritUserDetailsService;
+import com.meritamerica.capstonebackend.util.JwtUtil;
 
 @CrossOrigin(origins = "*")
 @RestController

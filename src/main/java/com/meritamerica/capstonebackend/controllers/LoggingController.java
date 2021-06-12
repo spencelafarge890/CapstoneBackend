@@ -1,4 +1,4 @@
-package com.meritamerica.assignment7.controllers;
+package com.meritamerica.capstonebackend.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

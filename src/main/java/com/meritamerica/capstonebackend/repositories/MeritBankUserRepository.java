@@ -1,8 +1,8 @@
-package com.meritamerica.assignment7.repositories;
+package com.meritamerica.capstonebackend.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.meritamerica.assignment7.models.MeritBankUser;
+import com.meritamerica.capstonebackend.models.MeritBankUser;
 
 public interface MeritBankUserRepository extends JpaRepository<MeritBankUser, Integer>{
 

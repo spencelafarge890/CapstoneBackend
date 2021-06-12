@@ -1,4 +1,4 @@
-package com.meritamerica.assignment7.models.transactions;
+package com.meritamerica.capstonebackend.models.transactions;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.meritamerica.assignment7.models.BankAccount;
+import com.meritamerica.capstonebackend.models.BankAccount;
 
 @Entity
 @DiscriminatorValue("withdrawl")

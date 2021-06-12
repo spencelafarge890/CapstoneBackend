@@ -1,4 +1,4 @@
-package com.meritamerica.assignment7.services;
+package com.meritamerica.capstonebackend.services;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.meritamerica.assignment7.models.MeritBankUser;
-import com.meritamerica.assignment7.repositories.MeritBankUserRepository;
+import com.meritamerica.capstonebackend.models.MeritBankUser;
+import com.meritamerica.capstonebackend.repositories.MeritBankUserRepository;
 
 
 @Service

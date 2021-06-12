@@ -1,4 +1,4 @@
-package com.meritamerica.assignment7.controllers;
+package com.meritamerica.capstonebackend.controllers;
 
 import java.util.List;
 
@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.meritamerica.assignment7.models.AccountHolderContact;
-import com.meritamerica.assignment7.models.AuthenticationRequest;
-import com.meritamerica.assignment7.repositories.*;
+import com.meritamerica.capstonebackend.models.AccountHolderContact;
+import com.meritamerica.capstonebackend.models.AuthenticationRequest;
+import com.meritamerica.capstonebackend.repositories.*;
 
 @CrossOrigin
 @RestController

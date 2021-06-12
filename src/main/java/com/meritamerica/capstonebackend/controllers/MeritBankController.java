@@ -1,4 +1,4 @@
-package com.meritamerica.assignment7.controllers;
+package com.meritamerica.capstonebackend.controllers;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,24 +24,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.meritamerica.assignment7.models.AccountHolder;
-import com.meritamerica.assignment7.models.AuthenticationRequest;
-import com.meritamerica.assignment7.models.AuthenticationResponse;
-import com.meritamerica.assignment7.models.CDAccount;
-import com.meritamerica.assignment7.models.CDAccountCreator;
-import com.meritamerica.assignment7.models.CDOffering;
-import com.meritamerica.assignment7.models.CheckingAccount;
-import com.meritamerica.assignment7.models.DBACheckingAccount;
-import com.meritamerica.assignment7.models.PersonalCheckingAccount;
-import com.meritamerica.assignment7.models.SavingsAccount;
-import com.meritamerica.assignment7.models.exceptions.ExceedsCombinedBalanceLimitException;
-import com.meritamerica.assignment7.models.exceptions.NegativeAmountException;
-import com.meritamerica.assignment7.models.exceptions.NoSuchResourceFoundException;
-import com.meritamerica.assignment7.models.MeritBankUser;
-import com.meritamerica.assignment7.services.AccountHolderServiceImpl;
-import com.meritamerica.assignment7.services.MeritBankServiceImpl;
-import com.meritamerica.assignment7.services.MeritUserDetailsService;
-import com.meritamerica.assignment7.util.JwtUtil;
+import com.meritamerica.capstonebackend.models.AccountHolder;
+import com.meritamerica.capstonebackend.models.AuthenticationRequest;
+import com.meritamerica.capstonebackend.models.AuthenticationResponse;
+import com.meritamerica.capstonebackend.models.CDAccount;
+import com.meritamerica.capstonebackend.models.CDAccountCreator;
+import com.meritamerica.capstonebackend.models.CDOffering;
+import com.meritamerica.capstonebackend.models.CheckingAccount;
+import com.meritamerica.capstonebackend.models.DBACheckingAccount;
+import com.meritamerica.capstonebackend.models.MeritBankUser;
+import com.meritamerica.capstonebackend.models.PersonalCheckingAccount;
+import com.meritamerica.capstonebackend.models.SavingsAccount;
+import com.meritamerica.capstonebackend.models.exceptions.ExceedsCombinedBalanceLimitException;
+import com.meritamerica.capstonebackend.models.exceptions.NegativeAmountException;
+import com.meritamerica.capstonebackend.models.exceptions.NoSuchResourceFoundException;
+import com.meritamerica.capstonebackend.services.AccountHolderServiceImpl;
+import com.meritamerica.capstonebackend.services.MeritBankServiceImpl;
+import com.meritamerica.capstonebackend.services.MeritUserDetailsService;
+import com.meritamerica.capstonebackend.util.JwtUtil;
 
 @CrossOrigin
 @RestController

@@ -1,4 +1,4 @@
-package com.meritamerica.assignment7.services;
+package com.meritamerica.capstonebackend.services;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,12 +7,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.meritamerica.assignment7.models.AccountHolder;
-import com.meritamerica.assignment7.models.CDOffering;
-import com.meritamerica.assignment7.models.MeritBankUser;
-import com.meritamerica.assignment7.models.exceptions.NoSuchResourceFoundException;
-import com.meritamerica.assignment7.repositories.AccountHolderRepository;
-import com.meritamerica.assignment7.repositories.CDOfferingRepository;
+import com.meritamerica.capstonebackend.models.AccountHolder;
+import com.meritamerica.capstonebackend.models.CDOffering;
+import com.meritamerica.capstonebackend.models.MeritBankUser;
+import com.meritamerica.capstonebackend.models.exceptions.NoSuchResourceFoundException;
+import com.meritamerica.capstonebackend.repositories.AccountHolderRepository;
+import com.meritamerica.capstonebackend.repositories.CDOfferingRepository;
 
 
 

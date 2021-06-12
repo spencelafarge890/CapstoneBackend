@@ -1,4 +1,4 @@
-package com.meritamerica.assignment7.filters;
+package com.meritamerica.capstonebackend.filters;
 
 import java.io.IOException;
 
@@ -15,10 +15,10 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.meritamerica.assignment7.models.MeritBankUser;
-import com.meritamerica.assignment7.services.MeritBankServiceImpl;
-import com.meritamerica.assignment7.services.MeritUserDetailsService;
-import com.meritamerica.assignment7.util.JwtUtil;
+import com.meritamerica.capstonebackend.models.MeritBankUser;
+import com.meritamerica.capstonebackend.services.MeritBankServiceImpl;
+import com.meritamerica.capstonebackend.services.MeritUserDetailsService;
+import com.meritamerica.capstonebackend.util.JwtUtil;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter{

@@ -1,4 +1,4 @@
-package com.meritamerica.assignment7;
+package com.meritamerica.capstonebackend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -8,15 +8,13 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import com.meritamerica.assignment7.repositories.AccountHolderRepository;
-
-
+import com.meritamerica.capstonebackend.repositories.AccountHolderRepository;
 
 @SpringBootApplication
-public class Assignment7Application {
+public class CapstoneBackendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Assignment7Application.class, args);
+		SpringApplication.run(CapstoneBackendApplication.class, args);
 	}
 
 }

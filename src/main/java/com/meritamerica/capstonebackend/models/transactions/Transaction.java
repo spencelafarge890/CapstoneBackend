@@ -1,4 +1,4 @@
-package com.meritamerica.assignment7.models.transactions;
+package com.meritamerica.capstonebackend.models.transactions;
 
 import java.util.Date;
 

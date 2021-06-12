@@ -1,4 +1,4 @@
-package com.meritamerica.assignment7.models;
+package com.meritamerica.capstonebackend.models;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,10 +22,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.meritamerica.assignment7.models.transactions.Deposit;
-import com.meritamerica.assignment7.models.transactions.Transaction;
-import com.meritamerica.assignment7.models.transactions.Transfer;
-import com.meritamerica.assignment7.models.transactions.Withdrawl;
+import com.meritamerica.capstonebackend.models.transactions.Deposit;
+import com.meritamerica.capstonebackend.models.transactions.Transaction;
+import com.meritamerica.capstonebackend.models.transactions.Transfer;
+import com.meritamerica.capstonebackend.models.transactions.Withdrawl;
 
 import java.lang.NumberFormatException;
 import java.text.ParseException;

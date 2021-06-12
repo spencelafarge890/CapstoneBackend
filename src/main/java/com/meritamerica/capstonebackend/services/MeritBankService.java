@@ -1,4 +1,4 @@
-package com.meritamerica.assignment7.services;
+package com.meritamerica.capstonebackend.services;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -19,8 +19,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 
-import com.meritamerica.assignment7.models.CDOffering;
-import com.meritamerica.assignment7.repositories.AccountHolderRepository;
+import com.meritamerica.capstonebackend.models.CDOffering;
+import com.meritamerica.capstonebackend.repositories.AccountHolderRepository;
 
 public abstract class MeritBankService {
 	

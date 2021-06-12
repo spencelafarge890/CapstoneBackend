@@ -1,4 +1,4 @@
-package com.meritamerica.assignment7.models;
+package com.meritamerica.capstonebackend.models;
 
 import java.text.ParseException;
 import java.util.ArrayList;

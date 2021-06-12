@@ -1,4 +1,4 @@
-package com.meritamerica.assignment7.services;
+package com.meritamerica.capstonebackend.services;
 
 import java.util.List;
 
@@ -7,16 +7,16 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.meritamerica.assignment7.models.AccountHolder;
-import com.meritamerica.assignment7.models.CDAccount;
-import com.meritamerica.assignment7.models.DBACheckingAccount;
-import com.meritamerica.assignment7.models.PersonalCheckingAccount;
-import com.meritamerica.assignment7.models.SavingsAccount;
-import com.meritamerica.assignment7.models.exceptions.NoSuchResourceFoundException;
-import com.meritamerica.assignment7.repositories.CDAccountRepository;
-import com.meritamerica.assignment7.repositories.DBACheckingAccountRepository;
-import com.meritamerica.assignment7.repositories.PersonalCheckingAccountRepository;
-import com.meritamerica.assignment7.repositories.SavingsAccountRepository;
+import com.meritamerica.capstonebackend.models.AccountHolder;
+import com.meritamerica.capstonebackend.models.CDAccount;
+import com.meritamerica.capstonebackend.models.DBACheckingAccount;
+import com.meritamerica.capstonebackend.models.PersonalCheckingAccount;
+import com.meritamerica.capstonebackend.models.SavingsAccount;
+import com.meritamerica.capstonebackend.models.exceptions.NoSuchResourceFoundException;
+import com.meritamerica.capstonebackend.repositories.CDAccountRepository;
+import com.meritamerica.capstonebackend.repositories.DBACheckingAccountRepository;
+import com.meritamerica.capstonebackend.repositories.PersonalCheckingAccountRepository;
+import com.meritamerica.capstonebackend.repositories.SavingsAccountRepository;
 
 @Service
 public class AccountHolderServiceImpl {

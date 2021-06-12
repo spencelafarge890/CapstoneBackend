@@ -1,4 +1,4 @@
-package com.meritamerica.assignment7.models;
+package com.meritamerica.capstonebackend.models;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.meritamerica.assignment7.services.MeritBankService;
+import com.meritamerica.capstonebackend.services.MeritBankService;
 
 @Entity
 public class CDOffering implements Comparable<CDOffering>{

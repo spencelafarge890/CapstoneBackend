@@ -1,4 +1,4 @@
-package com.meritamerica.assignment7.util;
+package com.meritamerica.capstonebackend.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import com.meritamerica.assignment7.models.AccountHolder;
-import com.meritamerica.assignment7.models.MeritBankUser;
+import com.meritamerica.capstonebackend.models.AccountHolder;
+import com.meritamerica.capstonebackend.models.MeritBankUser;
 
 import java.util.Date;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.meritamerica.assignment7.models.exceptions;
+package com.meritamerica.capstonebackend.models.exceptions;
 
 public class InterestRateOutOfRangeException extends Exception {
 	

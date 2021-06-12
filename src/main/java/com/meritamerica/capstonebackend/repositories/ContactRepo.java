@@ -1,9 +1,9 @@
-package com.meritamerica.assignment7.repositories;
+package com.meritamerica.capstonebackend.repositories;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.meritamerica.assignment7.models.AccountHolderContact;
+import com.meritamerica.capstonebackend.models.AccountHolderContact;
 
 public interface ContactRepo extends JpaRepository<AccountHolderContact, Integer>{
 

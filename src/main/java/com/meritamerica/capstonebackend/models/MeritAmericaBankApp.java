@@ -1,4 +1,4 @@
-package com.meritamerica.assignment7.models;
+package com.meritamerica.capstonebackend.models;
 
 public class MeritAmericaBankApp {
 	/*public static void main(String[] args) {

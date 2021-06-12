@@ -1,4 +1,4 @@
-package com.meritamerica.assignment7.models.exceptions;
+package com.meritamerica.capstonebackend.models.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
