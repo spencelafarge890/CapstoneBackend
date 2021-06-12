@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.meritamerica</groupId>
-	<artifactId>assignment5</artifactId>
+	<artifactId>CapstoneBackend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>assignment5</name>
-	<description>BankApp part 5</description>
+	<name>CapstoneBackend</name>
+	<description>Capstone backend services.</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
