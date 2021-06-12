@@ -47,12 +47,30 @@ public class MeEndpointController {
 	@Autowired
 	JwtUtil jwtUtil;
 	
-	@GetMapping("/me")
-	//@Secured("ROLE_USER")
+	//keep this one for later
+	/*@GetMapping("/me")
+	@Secured("ROLE_USER")
 	public AccountHolder getAccountHolderByUserJWT() throws NoSuchResourceFoundException {
 		//return meritBankSvc.getAccountHolderByUser(meritUserSvc.loadUserByUsername("user"));
 		return meritBankSvc.getAccountHolderByUser(jwtUtil.getCurrentUser());
+	}*/
+	
+	
+	
+	@GetMapping("/me")
+	@Secured("ROLE_USER")
+	public AccountHolder getAccountHolderByUserJWT() throws NoSuchResourceFoundException {
+		return meritBankSvc.getAccountHolderByUser(meritUserSvc.loadUserByUsername("user"));
+		//return meritBankSvc.getAccountHolderByUser(jwtUtil.getCurrentUser());
 	}
+	
+	@GetMapping("/me/{jwt}")
+	@Secured("ROLE_USER")
+	public AccountHolder getAccountHolderByJWT(@PathVariable String jwt) throws NoSuchResourceFoundException {
+		//return meritBankSvc.getAccountHolderByUser(meritUserSvc.loadUserByUsername("user"));
+		return meritBankSvc.getAccountHolderByUser(meritUserSvc.loadUserByUsername(jwtUtil.extractUsername(jwt)));
+	}
+	
 	
 	
 	//Just in case we need it - otherwise this functionality will be distributed to admin role

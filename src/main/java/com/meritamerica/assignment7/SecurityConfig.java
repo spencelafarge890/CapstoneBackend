@@ -39,8 +39,8 @@ import com.meritamerica.assignment7.services.MeritUserDetailsService;
 
 
 @EnableWebSecurity
-@EnableGlobalMethodSecurity( 
-		  securedEnabled = true)
+//@EnableGlobalMethodSecurity( 
+//		  securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
@@ -65,11 +65,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.cors().and().csrf().disable();
 		 httpSecurity.authorizeRequests()
+		 .antMatchers("/me").permitAll()
         .antMatchers("/authenticate").permitAll()
         .antMatchers("/h2-console/**").permitAll()
         .antMatchers("/v3/api-docs/**").permitAll()
 		 .antMatchers("/swagger-ui/**").permitAll()
 		 .antMatchers("/swagger-ui.html").permitAll()
+		 .antMatchers("/me**").hasRole("USER")
         .anyRequest().authenticated().and()
 			.exceptionHandling().and().sessionManagement()
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
