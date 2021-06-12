@@ -28,7 +28,7 @@ import com.meritamerica.assignment7.services.MeritBankServiceImpl;
 import com.meritamerica.assignment7.services.MeritUserDetailsService;
 import com.meritamerica.assignment7.util.JwtUtil;
 
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RestController
 public class MeEndpointController {
 	
@@ -48,9 +48,9 @@ public class MeEndpointController {
 	JwtUtil jwtUtil;
 	
 	@GetMapping("/me")
-	@Secured("ROLE_USER")
-	public AccountHolder getAccountHolderByUserId() throws NoSuchResourceFoundException {
-		
+	//@Secured("ROLE_USER")
+	public AccountHolder getAccountHolderByUserJWT() throws NoSuchResourceFoundException {
+		//return meritBankSvc.getAccountHolderByUser(meritUserSvc.loadUserByUsername("user"));
 		return meritBankSvc.getAccountHolderByUser(jwtUtil.getCurrentUser());
 	}
 	
