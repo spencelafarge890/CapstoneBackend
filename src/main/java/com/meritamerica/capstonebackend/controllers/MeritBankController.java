@@ -85,7 +85,7 @@ public class MeritBankController {
 
 		final String jwt = jwtUtil.generateToken(userDetails);
 		 
-		return ResponseEntity.ok(new AuthenticationResponse(jwt));
+		return ResponseEntity.ok(new AuthenticationResponse(userDetails.getUsername(), userDetails.getRole(), jwt));
 	}
 	
 	
