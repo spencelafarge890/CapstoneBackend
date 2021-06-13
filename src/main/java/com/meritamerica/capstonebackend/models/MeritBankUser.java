@@ -36,6 +36,7 @@ public class MeritBankUser implements UserDetails{
 	@NotNull
 	private String username;
 	
+    @JsonIgnore
 	@NotBlank
 	@NotNull
 	private String password;
@@ -60,6 +61,10 @@ public class MeritBankUser implements UserDetails{
 	}
 
 	public String getRole() {
+		if (this.role != null && this.role.startsWith("ROLE_")) {
+			return this.role.substring(5);
+		}
+
 		return role;
 	}
 
@@ -128,15 +133,15 @@ public class MeritBankUser implements UserDetails{
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		authorities = new ArrayList<GrantedAuthority>();
-		authorities.add(new SimpleGrantedAuthority(role));
+		authorities.add(new SimpleGrantedAuthority(this.role));
 		return authorities;
 	}
 	
 	public void setAuthorities() {
-		this.authorities.add(new SimpleGrantedAuthority(this.getRole()));
+		this.authorities.add(new SimpleGrantedAuthority(this.role));
 	}
 
 	public void addAuthority(String role) {
-		authorities.add(new SimpleGrantedAuthority(role));
+		authorities.add(new SimpleGrantedAuthority(this.role));
 	}
 }
