@@ -7,11 +7,7 @@ public class AuthenticationResponse {
 	
 	public AuthenticationResponse(String username, String role, String jwt) {
 		this.username = username;
-		this.jwt = jwt;
-		
-		if (role != null && role.startsWith("ROLE_")) {
-			role = role.substring(5);
-		}
+		this.jwt = jwt;		
 		this.role = role;
 	}
 	
