@@ -56,7 +56,7 @@ public class AccountHolder implements Comparable<AccountHolder>{
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "accountHolder")
 	private List<SavingsAccount> savingsAccounts;
 	
-	@JsonIgnore
+	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "accountHolder")
 	private List<CDAccount> cdAccounts;
 
