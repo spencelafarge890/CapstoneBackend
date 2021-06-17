@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.meritamerica.capstonebackend.services.MeritBankService;
 
 @Entity
+@DiscriminatorValue("DBAChecking")
 public class DBACheckingAccount extends CheckingAccount {
 	
 	

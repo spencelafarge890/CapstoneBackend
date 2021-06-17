@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -32,7 +33,9 @@ import java.lang.NumberFormatException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="account_type", discriminatorType = DiscriminatorType.STRING)
 public abstract class BankAccount {
 	
 	@Id
@@ -54,8 +57,7 @@ public abstract class BankAccount {
 	protected double interestRate;
 	
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "account", referencedColumnName = "id")
+	@OneToMany(mappedBy = "account")
 	private List<Transaction> transactions;
 	
 	

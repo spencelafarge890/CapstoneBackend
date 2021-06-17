@@ -75,10 +75,10 @@ public class MeEndpointController {
 	
 	@PostMapping("/me/{fromAccountId}/{toAccountId}/add-transfer")
 	@Secured("ROLE_USER")
-	public Transaction addTransferByIds(@PathVariable("fromAccountId") Integer fromAccountId, @PathVariable("toAccountId") Integer toAccountId,
+	public Transaction addTransferByIds(@PathVariable("toAccountId") Integer toAccountId, @PathVariable("fromAccountId") Integer fromAccountId,
 			@RequestBody Transfer transaction) throws NoSuchResourceFoundException, ExceedsAvailableBalanceException {
-		if (bankAccService.getTransferAccountById(2) != null && bankAccService.getTransferAccountById(3) != null) {
-			bankAccService.addTransfer(transaction, bankAccService.getTransferAccountById(2), bankAccService.getTransferAccountById(3));
+		if (bankAccService.getTransferAccountById(fromAccountId) != null && bankAccService.getTransferAccountById(toAccountId) != null) {
+			bankAccService.addTransfer(transaction, bankAccService.getTransferAccountById(fromAccountId), bankAccService.getTransferAccountById(toAccountId));
 			return transaction;
 		} else {
 			throw new NoSuchResourceFoundException("Account not found!");

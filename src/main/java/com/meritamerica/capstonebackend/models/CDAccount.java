@@ -24,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
+@DiscriminatorValue("CDAccount")
 public class CDAccount extends BankAccount {
 	
 	

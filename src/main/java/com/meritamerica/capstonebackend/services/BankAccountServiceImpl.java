@@ -47,11 +47,11 @@ public class BankAccountServiceImpl {
 	
 	public BankAccount getTransferAccountById(Integer id) throws NoSuchResourceFoundException {
 		if (dbaCheckingRepo.existsById(id)) {
-			return  dbaCheckingRepo.findById(id);
-		} else if (savingsRepo.existsById(null)) {
-			return savingsRepo.findById(id);
+			return  dbaCheckingRepo.findById(id).orElseThrow(() -> new NoSuchResourceFoundException("Account Not Found"));
+		} else if (savingsRepo.existsById(id)) {
+			return savingsRepo.findById(id).orElseThrow(() -> new NoSuchResourceFoundException("Account Not Found"));
 		} else if (personalCheckRepo.existsById(id)) {
-			return personalCheckRepo.findById(id);
+			return personalCheckRepo.findById(id).orElseThrow(() -> new NoSuchResourceFoundException("Account Not Found"));
 		} else {
 			return null;
 		}
@@ -131,13 +131,19 @@ public class BankAccountServiceImpl {
 	}
 	
 	
-	public void addTransfer(Transfer transfer, BankAccount fromAccount, BankAccount toAccount) throws ExceedsAvailableBalanceException {
+	public void addTransfer(Transaction transfer, BankAccount fromAccount, BankAccount toAccount) throws ExceedsAvailableBalanceException {
 		if (fromAccount.getBalance() >= transfer.getAmount()) {
-		fromAccount.addTransaction(transfer);
-		toAccount.addTransaction(transfer);
-		transferRepo.save(transfer);
-		toAccount.setBalance(toAccount.getBalance() + transfer.getAmount());
-		fromAccount.setBalance(fromAccount.getBalance() - transfer.getAmount());
+			Transfer toAccountTransaction = new Transfer();
+			toAccountTransaction.setAmount(transfer.getAmount());
+			toAccountTransaction.setOrigin("Transfer");
+			toAccountTransaction.setAccount(toAccount);
+			transfer.setAccount(fromAccount);
+			fromAccount.addTransaction(transfer);
+			fromAccount.setBalance(fromAccount.getBalance() - transfer.getAmount());
+			toAccount.addTransaction(toAccountTransaction);
+			toAccount.setBalance(toAccount.getBalance() + toAccountTransaction.getAmount());
+			transferRepo.save(toAccountTransaction);
+			transferRepo.save(transfer);
 		} else {
 			throw new ExceedsAvailableBalanceException("Cannot complete transfer; Insufficient funds");
 		}

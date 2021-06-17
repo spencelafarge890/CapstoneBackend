@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.meritamerica.capstonebackend.services.MeritBankService;
 
 @Entity
+@DiscriminatorValue("Savings")
 public class SavingsAccount extends BankAccount {
 	
 	@JsonIgnore

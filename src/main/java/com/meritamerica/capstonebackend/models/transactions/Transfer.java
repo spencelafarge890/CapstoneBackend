@@ -21,4 +21,6 @@ public class Transfer extends Transaction {
 	public Transfer() {
 		this.setTransactionType("transfer");
 	}
+
+	
 }

@@ -2,22 +2,28 @@ package com.meritamerica.capstonebackend.models.transactions;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.meritamerica.capstonebackend.models.BankAccount;
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "transaction")
 public abstract class Transaction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,6 +44,20 @@ public abstract class Transaction {
 	@Column(name = "transaction_type")
 	private String transactionType;
 	
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "account", nullable = false)
+	private BankAccount account;
+	
+
+	public BankAccount getAccount() {
+		return account;
+	}
+
+	public void setAccount(BankAccount account) {
+		this.account = account;
+	}
+
 	public Transaction() {
 		this.transactionDate = new Date();
 	}
