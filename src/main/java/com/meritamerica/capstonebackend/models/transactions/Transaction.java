@@ -40,6 +40,9 @@ public abstract class Transaction {
 	@Column(name = "transaction_type")
 	private String transactionType;
 	
+	public Transaction() {
+		this.transactionDate = new Date();
+	}
 	
 	public String getOrigin() {
 		return origin;
@@ -55,10 +58,6 @@ public abstract class Transaction {
 
 	public void setOrigin(String origin) {
 		this.origin = origin;
-	}
-
-	public Transaction() {
-		this.transactionDate = new Date();
 	}
 
 	public Integer getId() {
