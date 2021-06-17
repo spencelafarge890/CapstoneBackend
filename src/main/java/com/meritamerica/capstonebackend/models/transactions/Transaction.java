@@ -35,8 +35,6 @@ public abstract class Transaction {
 	@Column(name = "origin")
 	private String origin;
 	
-	@NotNull
-	@NotBlank
 	@Column(name = "transaction_type")
 	private String transactionType;
 	

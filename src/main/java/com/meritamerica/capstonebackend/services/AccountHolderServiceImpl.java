@@ -64,11 +64,11 @@ public class AccountHolderServiceImpl {
 	}
 	
 	public DBACheckingAccount getDBACheckingAccountById(int Id) throws NoSuchResourceFoundException {
-		return (DBACheckingAccount) dbaCheckAccRepo.findById(Id).orElseThrow(() -> new NoSuchResourceFoundException("Account Not Found"));
+		return (DBACheckingAccount) dbaCheckAccRepo.findById(Id).orElseThrow(new NoSuchResourceFoundException("Account not found")) ;
 	}
 	
 	public PersonalCheckingAccount getPersonalCheckingAccountById(int Id) throws NoSuchResourceFoundException {
-		return (PersonalCheckingAccount) personalCheckAccRepo.findById(Id).orElseThrow(() -> new NoSuchResourceFoundException("Account Not Found"));
+		return (PersonalCheckingAccount) personalCheckAccRepo.findById(Id);
 	}
 	
 	public List<DBACheckingAccount> getDBACheckingAccountsByAccountHolder(AccountHolder accountHolder) {
@@ -99,7 +99,7 @@ public class AccountHolderServiceImpl {
 	}
 	
 	public SavingsAccount getSavingsAccountById(int Id) throws NoSuchResourceFoundException {
-		return (SavingsAccount) savingAccRepo.findById(Id).orElseThrow(() -> new NoSuchResourceFoundException("Account Not Found"));
+		return (SavingsAccount) savingAccRepo.findById(Id);
 	}
 	
 	public List<CDAccount> getCDAccounts() {

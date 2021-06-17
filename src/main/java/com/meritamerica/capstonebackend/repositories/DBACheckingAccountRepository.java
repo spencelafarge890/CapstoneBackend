@@ -11,4 +11,5 @@ import com.meritamerica.capstonebackend.models.DBACheckingAccount;
 @Repository
 public interface DBACheckingAccountRepository extends JpaRepository<DBACheckingAccount, Integer> {
 	List<DBACheckingAccount> findBankAccountByAccountHolder(AccountHolder accountHolder);
+	
 }

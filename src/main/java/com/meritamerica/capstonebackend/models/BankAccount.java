@@ -18,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
@@ -35,7 +36,8 @@ import java.text.SimpleDateFormat;
 public abstract class BankAccount {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue (strategy= GenerationType.SEQUENCE, generator="bankAccountSequenceGen")
+	@SequenceGenerator(name = "bankAccountSequenceGen", sequenceName = "BANK_ACC_SEQ_GEN", initialValue = 5)
 	private Integer id;
 	
 	@Positive

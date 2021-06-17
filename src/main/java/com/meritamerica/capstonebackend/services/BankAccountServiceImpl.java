@@ -45,6 +45,18 @@ public class BankAccountServiceImpl {
 	@Autowired
 	private WithdrawlRepository withdrawlRepo;
 	
+	public BankAccount getTransferAccountById(Integer id) throws NoSuchResourceFoundException {
+		if (dbaCheckingRepo.existsById(id)) {
+			return  dbaCheckingRepo.findById(id);
+		} else if (savingsRepo.existsById(null)) {
+			return savingsRepo.findById(id);
+		} else if (personalCheckRepo.existsById(id)) {
+			return personalCheckRepo.findById(id);
+		} else {
+			return null;
+		}
+	}
+	
 	public List<Transaction> getDeposits(BankAccount account) throws NoSuchResourceFoundException {
 		List<Transaction> deposits = new ArrayList<Transaction>();
 		if (account.getTransactions() != null){

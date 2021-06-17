@@ -12,4 +12,6 @@ import com.meritamerica.capstonebackend.models.PersonalCheckingAccount;
 @Repository
 public interface PersonalCheckingAccountRepository extends JpaRepository<PersonalCheckingAccount, Integer>{
 	List<PersonalCheckingAccount> findBankAccountByAccountHolder(AccountHolder accountHolder);
+	
+
 }

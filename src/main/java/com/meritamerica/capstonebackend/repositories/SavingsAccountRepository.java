@@ -14,4 +14,6 @@ public interface SavingsAccountRepository extends JpaRepository<SavingsAccount, 
 
 	List<SavingsAccount> findBankAccountByAccountHolder(AccountHolder accountHolder);
 	
+
+	
 }

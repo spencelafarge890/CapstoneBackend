@@ -22,6 +22,7 @@ import com.meritamerica.capstonebackend.models.SavingsAccount;
 import com.meritamerica.capstonebackend.models.exceptions.ExceedsAvailableBalanceException;
 import com.meritamerica.capstonebackend.models.exceptions.NoSuchResourceFoundException;
 import com.meritamerica.capstonebackend.models.transactions.Transaction;
+import com.meritamerica.capstonebackend.models.transactions.Transfer;
 import com.meritamerica.capstonebackend.services.AccountHolderServiceImpl;
 import com.meritamerica.capstonebackend.services.BankAccountServiceImpl;
 import com.meritamerica.capstonebackend.services.MeritBankServiceImpl;
@@ -72,6 +73,17 @@ public class MeEndpointController {
 	}
 	
 	
+	@PostMapping("/me/{fromAccountId}/{toAccountId}/add-transfer")
+	@Secured("ROLE_USER")
+	public Transaction addTransferByIds(@PathVariable("fromAccountId") Integer fromAccountId, @PathVariable("toAccountId") Integer toAccountId,
+			@RequestBody Transfer transaction) throws NoSuchResourceFoundException, ExceedsAvailableBalanceException {
+		if (bankAccService.getTransferAccountById(2) != null && bankAccService.getTransferAccountById(3) != null) {
+			bankAccService.addTransfer(transaction, bankAccService.getTransferAccountById(2), bankAccService.getTransferAccountById(3));
+			return transaction;
+		} else {
+			throw new NoSuchResourceFoundException("Account not found!");
+		}
+	}
 	
 	//Just in case we need it - otherwise this functionality will be distributed to admin role
 	/*@PostMapping("/me/dba-checking-accounts")
@@ -84,6 +96,16 @@ public class MeEndpointController {
 		return checkAccount;
 	}*/
 	
+	@GetMapping("/me/dba-checking-accounts/{id}")
+	@Secured("ROLE_USER")
+	public DBACheckingAccount getDBACheckingAccountById(@PathVariable int id) throws NoSuchResourceFoundException {
+		if (accountHolderSvc.getDBACheckingAccountById(id) != null) {
+			return accountHolderSvc.getDBACheckingAccountById(id);
+		} else {
+			throw new NoSuchResourceFoundException("Account not found!");
+		}
+	}
+	
 	@GetMapping("/me/dba-checking-accounts")
 	@Secured("ROLE_USER")
 	public List<DBACheckingAccount> getDBACheckingAccounts() throws NoSuchResourceFoundException {
@@ -95,27 +117,9 @@ public class MeEndpointController {
 		}
 	}
 	
-	@GetMapping("/me/dba-checking-accounts/{id}")
-	@Secured("ROLE_USER")
-	public DBACheckingAccount getDBACheckingAccountById(@PathVariable int id) throws NoSuchResourceFoundException {
-		if (accountHolderSvc.getDBACheckingAccountById(id) != null) {
-			return accountHolderSvc.getDBACheckingAccountById(id);
-		} else {
-			throw new NoSuchResourceFoundException("Account not found!");
-		}
-	}
 	
-	@PostMapping("/me/dba-checking-accounts/{id}/add-transaction")
-	@Secured("ROLE_USER")
-	public Transaction addTransactionDBACheckingAccountById(@PathVariable int id,
-			@RequestBody Transaction transaction) throws NoSuchResourceFoundException, ExceedsAvailableBalanceException {
-		if (accountHolderSvc.getDBACheckingAccountById(id) != null) {
-			bankAccService.addTransaction(transaction, accountHolderSvc.getDBACheckingAccountById(id));
-			return transaction;
-		} else {
-			throw new NoSuchResourceFoundException("Account not found!");
-		}
-	}
+	
+	
 	
 	
 	//In progress
