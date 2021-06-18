@@ -15,14 +15,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.meritamerica.capstonebackend.models.AccountHolder;
 import com.meritamerica.capstonebackend.models.BankAccount;
 import com.meritamerica.capstonebackend.models.CDAccount;
+import com.meritamerica.capstonebackend.models.CDOffering;
 import com.meritamerica.capstonebackend.models.DBACheckingAccount;
 import com.meritamerica.capstonebackend.models.MeritBankUser;
 import com.meritamerica.capstonebackend.models.PersonalCheckingAccount;
 import com.meritamerica.capstonebackend.models.SavingsAccount;
 import com.meritamerica.capstonebackend.models.exceptions.ExceedsAvailableBalanceException;
 import com.meritamerica.capstonebackend.models.exceptions.NoSuchResourceFoundException;
+import com.meritamerica.capstonebackend.models.transactions.Deposit;
 import com.meritamerica.capstonebackend.models.transactions.Transaction;
 import com.meritamerica.capstonebackend.models.transactions.Transfer;
+import com.meritamerica.capstonebackend.models.transactions.Withdrawl;
 import com.meritamerica.capstonebackend.services.AccountHolderServiceImpl;
 import com.meritamerica.capstonebackend.services.BankAccountServiceImpl;
 import com.meritamerica.capstonebackend.services.MeritBankServiceImpl;
@@ -47,16 +50,7 @@ public class MeEndpointController {
 	
 	@Autowired
 	JwtUtil jwtUtil;
-	
-	//keep this one for later
-	/*@GetMapping("/me")
-	@Secured("ROLE_USER")
-	public AccountHolder getAccountHolderByUserJWT() throws NoSuchResourceFoundException {
-		//return meritBankSvc.getAccountHolderByUser(meritUserSvc.loadUserByUsername("user"));
-		return meritBankSvc.getAccountHolderByUser(jwtUtil.getCurrentUser());
-	}*/
-	
-	
+
 	
 	@GetMapping("/me")
 	@Secured("ROLE_USER")
@@ -80,6 +74,31 @@ public class MeEndpointController {
 		if (bankAccService.getTransferAccountById(fromAccountId) != null && bankAccService.getTransferAccountById(toAccountId) != null) {
 			bankAccService.addTransfer(transaction, bankAccService.getTransferAccountById(fromAccountId), bankAccService.getTransferAccountById(toAccountId));
 			return transaction;
+		} else {
+			throw new NoSuchResourceFoundException("Account not found!");
+		}
+	}
+	
+	@PostMapping("/me/{fromAccountId}/{cdOfferingId}/add-cd-account")
+	@Secured("ROLE_USER")
+	public CDAccount addCDAccountByIds(@PathVariable("fromAccountId") Integer fromAccountId, @PathVariable("cdOfferingId") Integer cdOffId,
+			@RequestBody Integer amount) throws NoSuchResourceFoundException, ExceedsAvailableBalanceException {
+		if (bankAccService.getTransferAccountById(fromAccountId) != null) {
+			BankAccount tempAccount = bankAccService.getTransferAccountById(fromAccountId);
+			Withdrawl transWidth = new Withdrawl(amount, tempAccount, "transfer");
+			bankAccService.addWithdrawl(transWidth, tempAccount);
+			CDOffering newOffering = accountHolderSvc.getCDOfferingById(cdOffId);
+			CDAccount thisCDAccount = new CDAccount(newOffering);
+			thisCDAccount.setBalance(amount);
+			Deposit newDeposit = new Deposit(amount, thisCDAccount);
+			newDeposit.setAmount(amount);
+			newDeposit.setOrigin("transfer");
+			newDeposit.setTransactionType("deposit");
+			//thisCDAccount.addTransaction(newDeposit);
+			bankAccService.addDepositNoAccount(newDeposit);
+			AccountHolder thisAccHolder = meritBankSvc.getAccountHolderByUser(jwtUtil.getCurrentUser());
+			accountHolderSvc.addCDAccount(thisCDAccount, thisAccHolder);
+			return thisCDAccount;
 		} else {
 			throw new NoSuchResourceFoundException("Account not found!");
 		}

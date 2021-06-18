@@ -19,4 +19,22 @@ public class Withdrawl extends Transaction {
 	public Withdrawl() {
 		this.setTransactionType("withdrawl");
 	}
+
+	public Withdrawl(Integer amount) {
+		this.setTransactionType("withdrawl");
+		this.setAmount((double) amount);
+	}
+
+	public Withdrawl(Integer amount, BankAccount tempAccount) {
+		this.setTransactionType("withdrawl");
+		this.setAmount((double) amount);
+		super.setAccount(tempAccount);
+	}
+
+	public Withdrawl(Integer amount, BankAccount tempAccount, String string) {
+		this.setTransactionType("withdrawl");
+		this.setAmount((double) amount);
+		this.setAccount(tempAccount);
+		this.setOrigin(string);
+	}
 }

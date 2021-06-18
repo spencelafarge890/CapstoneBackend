@@ -116,18 +116,57 @@ public class BankAccountServiceImpl {
 	
 	public void addWithdrawl(Withdrawl withdrawl, BankAccount account) throws ExceedsAvailableBalanceException {
 		if (account.getBalance() >= withdrawl.getAmount()) {
-		account.addTransaction(withdrawl);
-		withdrawlRepo.save(withdrawl);
-		account.setBalance(account.getBalance() - withdrawl.getAmount());
+			account.addTransaction(withdrawl);
+			withdrawlRepo.save(withdrawl);
+			account.setBalance(account.getBalance() - withdrawl.getAmount());
 		} else {
 			throw new ExceedsAvailableBalanceException("Cannot complete withdrawl; Insufficient funds.");
 		}
+	}
+	
+	public void addNewWithdrawlFromId(Integer amount, Integer id) throws ExceedsAvailableBalanceException, NoSuchResourceFoundException {
+		BankAccount account = getTransferAccountById(id);
+		Withdrawl withdrawl = new Withdrawl(amount);
+		if (account.getBalance() >= withdrawl.getAmount()) {
+			account.addTransaction(withdrawl);
+			withdrawlRepo.save(withdrawl);
+			account.setBalance(account.getBalance() - withdrawl.getAmount());
+		} else {
+			throw new ExceedsAvailableBalanceException("Cannot complete withdrawl; Insufficient funds.");
+		}
+	}
+	
+	public void addNewDepositFromId(Integer amount, Integer id) throws ExceedsAvailableBalanceException, NoSuchResourceFoundException {
+		BankAccount account = getTransferAccountById(id);
+		Deposit deposit = new Deposit(amount);
+		account.addTransaction(deposit);
+		depositRepo.save(deposit);
+		account.setBalance(account.getBalance() + deposit.getAmount());
 	}
 	
 	public void addDeposit(Deposit deposit, BankAccount account) {
 		account.addTransaction(deposit);
 		depositRepo.save(deposit);
 		account.setBalance(account.getBalance() + deposit.getAmount());
+	}
+	
+	public void addDepositNoAccount(Deposit deposit) {
+		depositRepo.save(deposit);
+	}
+	
+	/*public void addNewDepositFromId(Integer amount, Integer id) throws ExceedsAvailableBalanceException, NoSuchResourceFoundException {
+		BankAccount account = getTransferAccountById(id);
+		Deposit deposit = new Deposit(amount);
+		account.addTransaction(deposit);
+		depositRepo.save(deposit);
+		account.setBalance(account.getBalance() + deposit.getAmount());
+	}*/
+	
+	public void addNewDepositNewAccount(Integer amount, BankAccount account) {
+		Deposit deposit = new Deposit(amount);
+		account.addTransaction(deposit);
+		depositRepo.save(deposit);
+		account.setBalance(deposit.getAmount());
 	}
 	
 	

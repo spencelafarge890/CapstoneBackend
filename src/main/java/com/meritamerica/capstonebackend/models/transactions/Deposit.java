@@ -12,12 +12,24 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.meritamerica.capstonebackend.models.BankAccount;
+import com.meritamerica.capstonebackend.models.CDAccount;
 
 @Entity
 public class Deposit extends Transaction {
 	
 	public Deposit() {
 		this.setTransactionType("deposit");
+	}
+	
+	public Deposit(Integer amount) {
+		this.setTransactionType("withdrawl");
+		this.setAmount((double) amount);
+	}
+
+	public Deposit(Integer amount, CDAccount thisCDAccount) {
+		this.setTransactionType("withdrawl");
+		this.setAmount((double) amount);
+		super.setAccount(thisCDAccount);
 	}
 	
 }

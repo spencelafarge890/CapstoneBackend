@@ -9,12 +9,14 @@ import org.springframework.stereotype.Service;
 
 import com.meritamerica.capstonebackend.models.AccountHolder;
 import com.meritamerica.capstonebackend.models.CDAccount;
+import com.meritamerica.capstonebackend.models.CDOffering;
 import com.meritamerica.capstonebackend.models.DBACheckingAccount;
 import com.meritamerica.capstonebackend.models.PersonalCheckingAccount;
 import com.meritamerica.capstonebackend.models.SavingsAccount;
 import com.meritamerica.capstonebackend.models.exceptions.NoSuchResourceFoundException;
 import com.meritamerica.capstonebackend.repositories.BankAccountRepository;
 import com.meritamerica.capstonebackend.repositories.CDAccountRepository;
+import com.meritamerica.capstonebackend.repositories.CDOfferingRepository;
 import com.meritamerica.capstonebackend.repositories.DBACheckingAccountRepository;
 import com.meritamerica.capstonebackend.repositories.PersonalCheckingAccountRepository;
 import com.meritamerica.capstonebackend.repositories.SavingsAccountRepository;
@@ -34,9 +36,16 @@ public class AccountHolderServiceImpl {
 	@Autowired
 	private CDAccountRepository cdAccRepo;
 	
-	//public List<DBACheckingAccount> getDBACheckingAccounts() {
-		 //return bankAccountRepo.findAll();
-	//}
+	@Autowired
+	private CDOfferingRepository cdOfferingRepo;
+	
+	public CDOffering getCDOfferingById(Integer id) throws NoSuchResourceFoundException {
+		return cdOfferingRepo.findById(id).orElseThrow(() -> new NoSuchResourceFoundException("Account Not Found"));
+	}
+	
+	public List<DBACheckingAccount> getDBACheckingAccounts() {
+		 return dbaCheckAccRepo.findAll();
+	}
 	
 	public List<PersonalCheckingAccount> getPersonalCheckingAccounts() {
 		 return personalCheckAccRepo.findAll();

@@ -38,6 +38,7 @@ public class CDAccount extends BankAccount {
 	@Column(name = "term")
 	private int term;
 	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "cdOffering_id")
 	private CDOffering cdOffering;
@@ -48,6 +49,11 @@ public class CDAccount extends BankAccount {
 	public CDAccount(CDOffering cdOffering, int balance) {
 		this.cdOffering = cdOffering;
 		this.balance = balance;
+	}
+	
+	public CDAccount(CDOffering cdOffering) {
+		this.cdOffering = cdOffering;
+		this.setInterestRate(cdOffering.getInterestRate());
 	}
 
 	public int getTerm() {

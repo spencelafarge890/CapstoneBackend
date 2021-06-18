@@ -63,6 +63,12 @@ public abstract class Transaction {
 		this.transactionDate = new Date();
 	}
 	
+	public Transaction(BankAccount account) {
+		this.transactionDate = new Date();
+		this.account = account;
+	}
+
+	
 	public String getOrigin() {
 		return origin;
 	}
