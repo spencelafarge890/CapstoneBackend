@@ -19,25 +19,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.meritamerica.capstonebackend.services.MeritBankService;
 
 @Entity
-@DiscriminatorValue("Savings")
 public class SavingsAccount extends BankAccount {
 	
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "accountHolder_id", referencedColumnName = "id")
-	private AccountHolder accountHolder;
 	
 	public SavingsAccount() {
 		this.interestRate = MeritBankService.getSavingsInterest();
 	}
 	
-	public AccountHolder getAccountHolder() {
-		return accountHolder;
-	}
 
-	public void setAccountHolder(AccountHolder accountHolder) {
-		this.accountHolder = accountHolder;
-	}
 	
 }
 

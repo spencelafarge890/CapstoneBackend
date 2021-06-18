@@ -143,7 +143,7 @@ public class BankAccountServiceImpl {
 			toAccount.addTransaction(toAccountTransaction);
 			toAccount.setBalance(toAccount.getBalance() + toAccountTransaction.getAmount());
 			transferRepo.save(toAccountTransaction);
-			transferRepo.save(transfer);
+			transferRepo.save((Transfer) transfer);
 		} else {
 			throw new ExceedsAvailableBalanceException("Cannot complete transfer; Insufficient funds");
 		}

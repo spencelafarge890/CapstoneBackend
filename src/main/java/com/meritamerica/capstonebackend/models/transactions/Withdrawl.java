@@ -14,7 +14,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.meritamerica.capstonebackend.models.BankAccount;
 
 @Entity
-@DiscriminatorValue("withdrawl")
 public class Withdrawl extends Transaction {
 	
 	public Withdrawl() {

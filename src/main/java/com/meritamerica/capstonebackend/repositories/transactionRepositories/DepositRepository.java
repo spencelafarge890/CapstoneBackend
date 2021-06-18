@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.meritamerica.capstonebackend.models.transactions.Deposit;
 
-public interface DepositRepository extends TransactionRepository<Deposit, Integer> {
+public interface DepositRepository extends JpaRepository<Deposit, Integer> {
 
 
 }

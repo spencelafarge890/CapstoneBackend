@@ -34,10 +34,31 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @DiscriminatorColumn(name="account_type", discriminatorType = DiscriminatorType.STRING)
 public abstract class BankAccount {
 	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "accountHolder_id", referencedColumnName = "id")
+	@JsonIgnore
+	private AccountHolder accountHolder;
+	
+	public AccountHolder getAccountHolder() {
+		return accountHolder;
+	}
+
+	public void setAccountHolder(AccountHolder accountHolder) {
+		this.accountHolder = accountHolder;
+	}
+
+	public Date getAccountOpenedOn() {
+		return accountOpenedOn;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	@Id
 	@GeneratedValue (strategy= GenerationType.SEQUENCE, generator="bankAccountSequenceGen")
 	@SequenceGenerator(name = "bankAccountSequenceGen", sequenceName = "BANK_ACC_SEQ_GEN", initialValue = 5)

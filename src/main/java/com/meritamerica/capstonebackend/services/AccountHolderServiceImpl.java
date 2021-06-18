@@ -13,6 +13,7 @@ import com.meritamerica.capstonebackend.models.DBACheckingAccount;
 import com.meritamerica.capstonebackend.models.PersonalCheckingAccount;
 import com.meritamerica.capstonebackend.models.SavingsAccount;
 import com.meritamerica.capstonebackend.models.exceptions.NoSuchResourceFoundException;
+import com.meritamerica.capstonebackend.repositories.BankAccountRepository;
 import com.meritamerica.capstonebackend.repositories.CDAccountRepository;
 import com.meritamerica.capstonebackend.repositories.DBACheckingAccountRepository;
 import com.meritamerica.capstonebackend.repositories.PersonalCheckingAccountRepository;
@@ -33,9 +34,9 @@ public class AccountHolderServiceImpl {
 	@Autowired
 	private CDAccountRepository cdAccRepo;
 	
-	public List<DBACheckingAccount> getDBACheckingAccounts() {
-		 return dbaCheckAccRepo.findAll();
-	}
+	//public List<DBACheckingAccount> getDBACheckingAccounts() {
+		 //return bankAccountRepo.findAll();
+	//}
 	
 	public List<PersonalCheckingAccount> getPersonalCheckingAccounts() {
 		 return personalCheckAccRepo.findAll();

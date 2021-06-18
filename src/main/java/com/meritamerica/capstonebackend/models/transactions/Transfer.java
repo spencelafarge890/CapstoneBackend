@@ -15,7 +15,6 @@ import com.meritamerica.capstonebackend.models.BankAccount;
 
 
 @Entity
-@DiscriminatorValue("transfer")
 public class Transfer extends Transaction {
 	
 	public Transfer() {
