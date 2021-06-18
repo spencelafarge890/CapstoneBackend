@@ -35,7 +35,6 @@ import java.text.SimpleDateFormat;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@DiscriminatorColumn(name="account_type", discriminatorType = DiscriminatorType.STRING)
 public abstract class BankAccount {
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -61,7 +60,7 @@ public abstract class BankAccount {
 
 	@Id
 	@GeneratedValue (strategy= GenerationType.SEQUENCE, generator="bankAccountSequenceGen")
-	@SequenceGenerator(name = "bankAccountSequenceGen", sequenceName = "BANK_ACC_SEQ_GEN", initialValue = 5)
+	@SequenceGenerator(name = "bankAccountSequenceGen", sequenceName = "BANK_ACC_SEQ_GEN", initialValue = 27)
 	private Integer id;
 	
 	@Positive

@@ -30,8 +30,7 @@ public class CDOfferingController {
 	MeritBankServiceImpl meritBankSvc;
 	
 	@GetMapping("/cd-offerings")
-	@ResponseStatus(HttpStatus.CREATED)
-	@Secured("ROLE_ADMIN")
+	@ResponseStatus(HttpStatus.OK)
     public List<CDOffering> getCDOfferings() { 
         return meritBankSvc.getAllCDOfferings();
     }

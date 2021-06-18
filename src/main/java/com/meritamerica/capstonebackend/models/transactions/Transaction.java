@@ -27,7 +27,7 @@ import com.meritamerica.capstonebackend.models.BankAccount;
 public abstract class Transaction {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="bankAccountSequenceGen")
 	private Integer id;
 	
 	@Positive
