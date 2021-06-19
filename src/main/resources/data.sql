@@ -32,4 +32,3 @@ INSERT INTO merit_bank_user (username, password, role) VALUES ('spencer', 'spenc
 INSERT INTO account_holder (combined_balance, first_name, last_name, ssn, user_id) VALUES ('250000', 'Spencer', 'LaFarge', '65498732', '4');
 INSERT INTO merit_bank_user (username, password, role) VALUES ('matt', 'matt', 'ROLE_USER');
 INSERT INTO account_holder (combined_balance, first_name, last_name, middle_name, ssn, user_id) VALUES ('250000', 'Matt', 'Chvatal', 'D', '546789120', '5');
-

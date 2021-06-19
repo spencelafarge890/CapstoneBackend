@@ -117,7 +117,7 @@ public class AccountHolderServiceImpl {
 	}
 	
 	public void addCDAccount(CDAccount cdAccount, AccountHolder accHolder) {
-		accHolder.setCombinedBalance(accHolder.getCombinedBalance() + cdAccount.getBalance());
+		//accHolder.setCombinedBalance(accHolder.getCombinedBalance() + cdAccount.getBalance());
 		cdAccount.setAccountHolder(accHolder);
 		cdAccRepo.save(cdAccount);
 	}
