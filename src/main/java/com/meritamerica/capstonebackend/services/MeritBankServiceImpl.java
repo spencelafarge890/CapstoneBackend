@@ -14,8 +14,6 @@ import com.meritamerica.capstonebackend.models.exceptions.NoSuchResourceFoundExc
 import com.meritamerica.capstonebackend.repositories.AccountHolderRepository;
 import com.meritamerica.capstonebackend.repositories.CDOfferingRepository;
 
-
-
 @Service
 public class MeritBankServiceImpl extends MeritBankService {
 	
@@ -69,10 +67,14 @@ public class MeritBankServiceImpl extends MeritBankService {
 		cdOfferingRepo.save(offering);
 	}
 	
+	public CDOffering getCDOfferingById(Integer id) throws NoSuchResourceFoundException {
+		return cdOfferingRepo.findById(id)
+							.orElseThrow(() -> new NoSuchResourceFoundException("CD Offering not found."));
+	}
+	
 	public CDOffering getBestCDOffering() {
 		ArrayList<CDOffering> cdoList = (ArrayList<CDOffering>) cdOfferingRepo.findAll();
 		Collections.sort(cdoList);
 		return cdoList.get(0);
-	}
-	
+	}	
 }
